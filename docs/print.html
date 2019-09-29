@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -176,6 +176,43 @@ Second is a computer and some experience with running commands in the
 command line. Modern development relies increasingly on tools that require some
 proficiency with the command line.</p>
 <p>If you qualify, dive right in!</p>
+<h1><a class="header" href="#installing-elm" id="installing-elm">Installing Elm</a></h1>
+<p>Since <a href="https://elm-lang.org/">Elm</a> is one of the technologies we are using to create our flashcard app we
+better start with installing it.</p>
+<h2><a class="header" href="#installation" id="installation">Installation</a></h2>
+<p>How Elm can be installed is described in their [installation page][instal.elm].
+This includes setting up elm in a number of editors. Which certainly will come
+in handy.</p>
+<p>What is missing do are some helpful tools. Most notably <a href="https://github.com/elm-explorations/test"><code>elm-test</code></a>
+and <a href="https://github.com/avh4/elm-format"><code>elm-format</code></a>.
+<code>elm-test</code> is used to test your Elm code, a practice that provide even more
+confidence in refactoring your code.
+<code>elm-format</code> automatically formats your code, so that no wars can erupt over
+where to place which comma.</p>
+<p>You can learn how to <a href="https://github.com/elm-explorations/test#running-tests-locally">install <code>elm-test</code></a> from their README.
+Similarly, how to <a href="https://github.com/avh4/elm-format#installation-">install <code>elm-format</code></a> is described in
+their README as well.</p>
+<h2><a class="header" href="#verification" id="verification">Verification</a></h2>
+<p>If everything worked out as planned you should be able to execute the following
+commands</p>
+<pre><code class="language-sh">elm --version
+</code></pre>
+<p>This should respond with the latest version. At the time of writing that was
+<code>0.19.0</code>.</p>
+<p>Similarly, the following commands</p>
+<pre><code class="language-sh">elm-test --version
+</code></pre>
+<p>responds at the time of writing with <code>0.19.0-rev6</code>.</p>
+<p>Finally, verifying that <code>elm-format</code> is a little different. The command does not
+have a <code>--version</code> flag. Instead asking for <code>--help</code></p>
+<pre><code class="language-sh">elm-format --help
+</code></pre>
+<p>Should declare it's version at the top of its help page. Again. At the time of
+this writing that was <code>0.8.1</code>.</p>
+<h2><a class="header" href="#celebrate" id="celebrate">Celebrate</a></h2>
+<p>You are now all set for the next chapter. But before you go and explore the
+wonderful world of Elm, make sure you celebrate! Configuring your machine can be
+very hard.</p>
 
                     </main>
 
