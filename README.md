@@ -15,6 +15,9 @@ mdbook serve -p 2273 -w 35174
 you can now explore the book by opening
 [http://localhost:2273](http://localhost:2273).
 
+If you want to publish the changes, commit and push to this repository and the
+will be automatically deployed.
+
 [tutorial]: https://hermannebbinghaus.github.io/tutorial/index.html
 [mdbook]: https://rust-lang-nursery.github.io/mdBook/
 [install.mdbook]: https://github.com/rust-lang-nursery/mdBook#installation
