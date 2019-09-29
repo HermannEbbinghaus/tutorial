@@ -1,0 +1,9 @@
+[book]
+authors = ["Kirsty Simmonds", "Daan van Berkel"]
+multilingual = false
+src = "src"
+title = "Flashcard; A tutorial"
+description = "A tutorial to create a flashcard app"
+
+[build]
+build-dir = "docs"
