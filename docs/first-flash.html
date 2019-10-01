@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>What is this tutorial about - Flashcard; A tutorial</title>
+        <title>A first flash card - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html" class="active"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="install-rust.html"><strong aria-hidden="true">5.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="first-flash.html" class="active"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="install-rust.html"><strong aria-hidden="true">5.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,44 +145,63 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#what-is-this-tutorial-about" id="what-is-this-tutorial-about">What is this tutorial about?</a></h1>
-<p>In this tutorial you are going to learn how to create a flashcard app. A
-flashcard is a</p>
+                        <h1><a class="header" href="#a-first-flash-card" id="a-first-flash-card">A first flash card</a></h1>
+<p>Let's focus on how the structure of the Html should look like. In order to use
+the capabilities of Elm way of doing Html we imported the <code>Html</code>
+<a href="https://guide.elm-lang.org/webapps/modules.html"><em>module</em></a>.</p>
+<pre><code class="language-elm">import Html
+</code></pre>
+<p>A <em>module</em></p>
 <blockquote>
-<p>card bearing information on both sides, which is intended to be used as an aid
-in memorization. Each flashcard bears a question on one side and an answer on
-the other. Flashcards are often used to memorize vocabulary, historical dates,
-formulae or any subject matter that can be learned via a question-and-answer
-format.</p>
+<p>let you break your code into multiple files</p>
 </blockquote>
-<h2><a class="header" href="#stack" id="stack">Stack</a></h2>
-<p>The stack we are going to use in this tutorial is</p>
-<ul>
-<li><strong>frontend</strong>: <a href="https://elm-lang.org/">Elm</a></li>
-<li><strong>backend</strong>: <a href="https://www.rust-lang.org/">Rust</a></li>
-</ul>
-<p>The reason for this eclectic mix is because it was the preference of
-<a href="https://twitter.com/keinegurke_">@keinegurke_</a>. They wanted to learn both Elm, Rust and German. But an in depth
-tutorial was missing. Since flashcards could help them improve their vocabulary,
-they soon settle on building an app and documenting their progress in this
-tutorial.</p>
-<h2><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h2>
-<p>What would you need to start with this tutorial? First of all; in interest in
-either Elm, Rust, or both. The focus of this tutorial is in learning these
-technologies.
-Second is a computer and some experience with running commands in the
-command line. Modern development relies increasingly on tools that require some
-proficiency with the command line.</p>
-<p>If you qualify, dive right in!</p>
+<p>You can define you own modules, but we will wait until the opportunity arises.
+First we will be using modules defined in <em>packages</em> as found on <a href="https://package.elm-lang.org/">Elm packages</a></p>
+<h2><a class="header" href="#html-module" id="html-module"><code>Html</code> module</a></h2>
+<p>The <code>Html</code> module has <a href="https://package.elm-lang.org/packages/elm/html/latest/">documentation</a> as found in the Elm packages. It needs a
+little getting used to, but eventually you will get the hang of it.</p>
+<p>If we would write plain Html that would display a flash card, we could write
+something like this</p>
+<pre><code class="language-html">&lt;div&gt;
+  &lt;span&gt;Wettervorhersage&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Note that <em>wettervorhersage</em> is a German word meaning <em>weather forecast</em>. Maybe
+the snippet of Html is missing some attributes and classes, but for now we will
+focus on the structure.</p>
+<p>To mimick the snippet in Elm, we would write the following code in elm</p>
+<pre><code class="language-elm">main =
+    Html.div []
+        [ Html.span [] [ Html.text &quot;Wettervorhersage&quot; ]
+        ]
+</code></pre>
+<p>There are several things going on here. Not that Elm is a <a href="https://en.wikipedia.org/wiki/Functional_programming"><em>functional
+language</em></a>. This means that functions are the building blocks of
+creating programs.</p>
+<p>There are three functions used to recreate the Html. <code>Html.div</code>, <code>Html.span</code> and
+<code>Html.text</code>. Almost all functions in the Html module that produce tags accept
+two arguments. A list of attributes, and a list of content.</p>
+<p>We haven't defined attributes yet so the first argument of <code>Html.div</code> and
+<code>Html.span</code> is the <em>empty list</em>: <code>[]</code>. The second argument of <code>Html.div</code> is a
+list with content, i.e. a span that itself contains text.</p>
+<p>We will have more to say about functions but for now we can verify that
+everything works as expected.</p>
+<h2><a class="header" href="#verification" id="verification">Verification</a></h2>
+<p>When you reload the flash card app in the browser, you should see the German
+word for weather forecast.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="skeletal-elm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
-                            <a rel="next" href="install-elm.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="install-rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -194,9 +213,13 @@ proficiency with the command line.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a href="skeletal-elm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
                 
-                    <a href="install-elm.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="install-rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

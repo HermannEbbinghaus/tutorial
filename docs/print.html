@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="install-rust.html"><strong aria-hidden="true">4.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="install-rust.html"><strong aria-hidden="true">5.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -256,6 +256,50 @@ when necessary compile them on the fly.</p>
 asks you to got to <a href="http://localhost:8000">http://localhost:8000</a>. Going to that
 address you will find a file navigation pane. Navigate it to <code>src</code> &gt;
 <code>FlashCard.elm</code> and be greeting by your very own <code>Hello, World!</code></p>
+<h1><a class="header" href="#a-first-flash-card" id="a-first-flash-card">A first flash card</a></h1>
+<p>Let's focus on how the structure of the Html should look like. In order to use
+the capabilities of Elm way of doing Html we imported the <code>Html</code>
+<a href="https://guide.elm-lang.org/webapps/modules.html"><em>module</em></a>.</p>
+<pre><code class="language-elm">import Html
+</code></pre>
+<p>A <em>module</em></p>
+<blockquote>
+<p>let you break your code into multiple files</p>
+</blockquote>
+<p>You can define you own modules, but we will wait until the opportunity arises.
+First we will be using modules defined in <em>packages</em> as found on <a href="https://package.elm-lang.org/">Elm packages</a></p>
+<h2><a class="header" href="#html-module" id="html-module"><code>Html</code> module</a></h2>
+<p>The <code>Html</code> module has <a href="https://package.elm-lang.org/packages/elm/html/latest/">documentation</a> as found in the Elm packages. It needs a
+little getting used to, but eventually you will get the hang of it.</p>
+<p>If we would write plain Html that would display a flash card, we could write
+something like this</p>
+<pre><code class="language-html">&lt;div&gt;
+  &lt;span&gt;Wettervorhersage&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Note that <em>wettervorhersage</em> is a German word meaning <em>weather forecast</em>. Maybe
+the snippet of Html is missing some attributes and classes, but for now we will
+focus on the structure.</p>
+<p>To mimick the snippet in Elm, we would write the following code in elm</p>
+<pre><code class="language-elm">main =
+    Html.div []
+        [ Html.span [] [ Html.text &quot;Wettervorhersage&quot; ]
+        ]
+</code></pre>
+<p>There are several things going on here. Not that Elm is a <a href="https://en.wikipedia.org/wiki/Functional_programming"><em>functional
+language</em></a>. This means that functions are the building blocks of
+creating programs.</p>
+<p>There are three functions used to recreate the Html. <code>Html.div</code>, <code>Html.span</code> and
+<code>Html.text</code>. Almost all functions in the Html module that produce tags accept
+two arguments. A list of attributes, and a list of content.</p>
+<p>We haven't defined attributes yet so the first argument of <code>Html.div</code> and
+<code>Html.span</code> is the <em>empty list</em>: <code>[]</code>. The second argument of <code>Html.div</code> is a
+list with content, i.e. a span that itself contains text.</p>
+<p>We will have more to say about functions but for now we can verify that
+everything works as expected.</p>
+<h2><a class="header" href="#verification-2" id="verification-2">Verification</a></h2>
+<p>When you reload the flash card app in the browser, you should see the German
+word for weather forecast.</p>
 <h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
 <p>We will use <a href="https://www.rust-lang.org/">Rust</a> to create a web server. Before we can start writing our
 web server, we should install Rust.</p>
@@ -267,7 +311,7 @@ you to have multiple different versions of Rust live next to each other.</p>
 questions. Make sure you read and understand what the script will try to
 achieve. For this tutorial no customization is necessary.</p>
 <p>When the scripts finished Rust is installed. This comes with a couple of tools.</p>
-<h2><a class="header" href="#verification-2" id="verification-2">Verification</a></h2>
+<h2><a class="header" href="#verification-3" id="verification-3">Verification</a></h2>
 <p>To make sure that the installation was successful the following commands should
 run without error.</p>
 <pre><code class="language-sh">cargo --version
