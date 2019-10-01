@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="install-rust.html"><strong aria-hidden="true">3.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="install-rust.html"><strong aria-hidden="true">4.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -213,6 +213,49 @@ this writing that was <code>0.8.1</code>.</p>
 <p>You are now all set for the next chapter. But before you go and explore the
 wonderful world of Elm, make sure you celebrate! Configuring your machine can be
 very hard.</p>
+<h1><a class="header" href="#skeletal-elm-project" id="skeletal-elm-project">Skeletal Elm project</a></h1>
+<p>With all the <code>Elm</code> tools installed. It is time to take them for a spin. Right
+from the Elm is a very friendly language. When you ask Elm for help</p>
+<pre><code class="language-sh">elm --help
+</code></pre>
+<p>It will thank you for trying out Elm, give you some pointers where to find
+<a href="https://guide.elm-lang.org">more information</a> and tell you about some command options. We are
+interested in the <code>elm init</code> command. It promises to</p>
+<blockquote>
+<p>Start an Elm project. It creates a starter elm.json file and provides a link
+explaining what to do from there.</p>
+</blockquote>
+<p>This is a nice starting point. Run the command to start an Elm project. The
+skeletal project creates the following files and directories.</p>
+<pre><code class="language-plain">.
+├── elm.json
+└── src
+</code></pre>
+<p>The <code>elm.json</code> describes the Elm project. We describe it in more detail later in
+the tutorial. Besides the <code>elm.json</code> file there is a directory called <code>src</code>.
+This is where all the source files go.</p>
+<p>An empty <code>src</code> directory is an unhappy <code>src</code> directory. So let's go ahead and
+create a file named <code>FlashCard.elm</code> inside the <code>src</code> directory with the
+following content</p>
+<pre><code class="language-elm">module Main exposing (main)
+
+import Html
+
+
+main =
+    Html.text &quot;Hello, World!&quot;
+
+</code></pre>
+<h2><a class="header" href="#verification-1" id="verification-1">Verification</a></h2>
+<p>One of the cool things about Elm is that it can serve your files. By spinning up
+a reactor Elm will look at your files, create a web server, serve your files and
+when necessary compile them on the fly.</p>
+<pre><code class="language-sh">elm reactor
+</code></pre>
+<p>The above command will start the Elm reactor. The message that it returns with
+asks you to got to <a href="http://localhost:8000">http://localhost:8000</a>. Going to that
+address you will find a file navigation pane. Navigate it to <code>src</code> &gt;
+<code>FlashCard.elm</code> and be greeting by your very own <code>Hello, World!</code></p>
 <h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
 <p>We will use <a href="https://www.rust-lang.org/">Rust</a> to create a web server. Before we can start writing our
 web server, we should install Rust.</p>
@@ -224,7 +267,7 @@ you to have multiple different versions of Rust live next to each other.</p>
 questions. Make sure you read and understand what the script will try to
 achieve. For this tutorial no customization is necessary.</p>
 <p>When the scripts finished Rust is installed. This comes with a couple of tools.</p>
-<h2><a class="header" href="#verification-1" id="verification-1">Verification</a></h2>
+<h2><a class="header" href="#verification-2" id="verification-2">Verification</a></h2>
 <p>To make sure that the installation was successful the following commands should
 run without error.</p>
 <pre><code class="language-sh">cargo --version
