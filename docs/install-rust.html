@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Flashcard; A tutorial</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>Installing Rust - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -80,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="install-rust.html"><strong aria-hidden="true">3.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="install-rust.html" class="active"><strong aria-hidden="true">3.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -147,76 +145,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#what-is-this-tutorial-about" id="what-is-this-tutorial-about">What is this tutorial about?</a></h1>
-<p>In this tutorial you are going to learn how to create a flashcard app. A
-flashcard is a</p>
-<blockquote>
-<p>card bearing information on both sides, which is intended to be used as an aid
-in memorization. Each flashcard bears a question on one side and an answer on
-the other. Flashcards are often used to memorize vocabulary, historical dates,
-formulae or any subject matter that can be learned via a question-and-answer
-format.</p>
-</blockquote>
-<h2><a class="header" href="#stack" id="stack">Stack</a></h2>
-<p>The stack we are going to use in this tutorial is</p>
-<ul>
-<li><strong>frontend</strong>: <a href="https://elm-lang.org/">Elm</a></li>
-<li><strong>backend</strong>: <a href="https://www.rust-lang.org/">Rust</a></li>
-</ul>
-<p>The reason for this eclectic mix is because it was the preference of
-<a href="https://twitter.com/keinegurke_">@keinegurke_</a>. They wanted to learn both Elm, Rust and German. But an in depth
-tutorial was missing. Since flashcards could help them improve their vocabulary,
-they soon settle on building an app and documenting their progress in this
-tutorial.</p>
-<h2><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h2>
-<p>What would you need to start with this tutorial? First of all; in interest in
-either Elm, Rust, or both. The focus of this tutorial is in learning these
-technologies.
-Second is a computer and some experience with running commands in the
-command line. Modern development relies increasingly on tools that require some
-proficiency with the command line.</p>
-<p>If you qualify, dive right in!</p>
-<h1><a class="header" href="#installing-elm" id="installing-elm">Installing Elm</a></h1>
-<p>Since <a href="https://elm-lang.org/">Elm</a> is one of the technologies we are using to create our flashcard app we
-better start with installing it.</p>
-<h2><a class="header" href="#installation" id="installation">Installation</a></h2>
-<p>How Elm can be installed is described in their <a href="https://guide.elm-lang.org/install.html">installation page</a>.
-This includes setting up elm in a number of editors. Which certainly will come
-in handy.</p>
-<p>What is missing do are some helpful tools. Most notably <a href="https://github.com/elm-explorations/test"><code>elm-test</code></a>
-and <a href="https://github.com/avh4/elm-format"><code>elm-format</code></a>.
-<code>elm-test</code> is used to test your Elm code, a practice that provide even more
-confidence in refactoring your code.
-<code>elm-format</code> automatically formats your code, so that no wars can erupt over
-where to place which comma.</p>
-<p>You can learn how to <a href="https://github.com/elm-explorations/test#running-tests-locally">install <code>elm-test</code></a> from their README.
-Similarly, how to <a href="https://github.com/avh4/elm-format#installation-">install <code>elm-format</code></a> is described in
-their README as well.</p>
-<h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>If everything worked out as planned you should be able to execute the following
-commands</p>
-<pre><code class="language-sh">elm --version
-</code></pre>
-<p>This should respond with the latest version. At the time of writing that was
-<code>0.19.0</code>.</p>
-<p>Similarly, the following commands</p>
-<pre><code class="language-sh">elm-test --version
-</code></pre>
-<p>responds at the time of writing with <code>0.19.0-rev6</code>.</p>
-<p>Finally, verifying that <code>elm-format</code> is a little different. The command does not
-have a <code>--version</code> flag. Instead asking for <code>--help</code></p>
-<pre><code class="language-sh">elm-format --help
-</code></pre>
-<p>Should declare it's version at the top of its help page. Again. At the time of
-this writing that was <code>0.8.1</code>.</p>
-<h2><a class="header" href="#celebrate" id="celebrate">Celebrate</a></h2>
-<p>You are now all set for the next chapter. But before you go and explore the
-wonderful world of Elm, make sure you celebrate! Configuring your machine can be
-very hard.</p>
-<h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
+                        <h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
 <p>We will use <a href="https://www.rust-lang.org/">Rust</a> to create a web server. Before we can start writing our
 web server, we should install Rust.</p>
-<h2><a class="header" href="#installation-1" id="installation-1">Installation</a></h2>
+<h2><a class="header" href="#installation" id="installation">Installation</a></h2>
 <p>Rust can be installed and updated via a handy tool called <code>rustup</code> as described
 on the <a href="https://www.rust-lang.org/tools/install">installation page</a>. This allows
 you to have multiple different versions of Rust live next to each other.</p>
@@ -224,7 +156,7 @@ you to have multiple different versions of Rust live next to each other.</p>
 questions. Make sure you read and understand what the script will try to
 achieve. For this tutorial no customization is necessary.</p>
 <p>When the scripts finished Rust is installed. This comes with a couple of tools.</p>
-<h2><a class="header" href="#verification-1" id="verification-1">Verification</a></h2>
+<h2><a class="header" href="#verification" id="verification">Verification</a></h2>
 <p>To make sure that the installation was successful the following commands should
 run without error.</p>
 <pre><code class="language-sh">cargo --version
@@ -240,6 +172,10 @@ of this writing that was <code>1.38.0</code>.</p>
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="install-elm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
 
@@ -249,6 +185,10 @@ of this writing that was <code>1.38.0</code>.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="install-elm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
                 
 
                 
@@ -290,14 +230,6 @@ of this writing that was <code>1.38.0</code>.</p>
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>
