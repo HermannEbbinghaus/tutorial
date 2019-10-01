@@ -3,7 +3,7 @@ Since [Elm][elm] is one of the technologies we are using to create our flashcard
 better start with installing it.
 
 ## Installation
-How Elm can be installed is described in their [installation page][instal.elm].
+How Elm can be installed is described in their [installation page][install.elm].
 This includes setting up elm in a number of editors. Which certainly will come
 in handy.
 
