@@ -4,4 +4,5 @@
 - [Installing Elm](./install-elm.md)
 - [Skeletal Elm project](./frontend/skeletal-elm.md)
 - [A first flash card](./frontend/first-flash.md)
+- [A custom function](./frontend/custom-function.md)
 - [Installing Rust](./install-rust.md)
