@@ -301,6 +301,31 @@ everything works as expected.</p>
 <p>When you reload the flash card app in the browser, you should see the German
 word for weather forecast.</p>
 <h1><a class="header" href="#a-custom-function" id="a-custom-function">A custom function</a></h1>
+<p>We have created our first flash card, but it can only show &quot;Wettervorhersage&quot;.
+Although it is a great word, we would like to be able to show different words.
+Let's make that possible with the introduction of a custom function.</p>
+<p>What we would like to achieve is to write</p>
+<pre><code class="language-elm">main =
+    view &quot;Wettervorhersage&quot;
+</code></pre>
+<p>and let the <code>view</code> function return the Html for the flash card. For this we need
+to create a function. Functions are defined by stating their name, i.e. <code>view</code>,
+and their arguments. For us that would be the text that we want to show, so
+let's call the argument for our function <code>text</code>.</p>
+<p>Next would comes the body of the function and it defined the return value. For
+us that looks very similar to our first flash card. The only difference is that
+instead of the hard coded <code>&quot;Wettervorhersage&quot;</code>, we want to show the argument,
+I.e. <code>text</code>.</p>
+<p>Putting all this together, the <code>view</code> function comes down together</p>
+<pre><code class="language-elm">view text =
+    Html.div []
+        [ Html.span [] [ Html.text text ]
+        ]
+</code></pre>
+<h2><a class="header" href="#verification-3" id="verification-3">Verification</a></h2>
+<p>If your reload the application you should still see our flash card that displays
+&quot;Wettervorhersage&quot;. Changing the argument of the view function and reloading
+should reflect in the app.</p>
 <h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
 <p>We will use <a href="https://www.rust-lang.org/">Rust</a> to create a web server. Before we can start writing our
 web server, we should install Rust.</p>
@@ -312,7 +337,7 @@ you to have multiple different versions of Rust live next to each other.</p>
 questions. Make sure you read and understand what the script will try to
 achieve. For this tutorial no customization is necessary.</p>
 <p>When the scripts finished Rust is installed. This comes with a couple of tools.</p>
-<h2><a class="header" href="#verification-3" id="verification-3">Verification</a></h2>
+<h2><a class="header" href="#verification-4" id="verification-4">Verification</a></h2>
 <p>To make sure that the installation was successful the following commands should
 run without error.</p>
 <pre><code class="language-sh">cargo --version
