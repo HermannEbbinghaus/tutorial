@@ -8,4 +8,5 @@
 - [Type annotations](./frontend/type-annotations.md)
 - [Namespaces](./frontend/namespaces.md)
 - [A custom type](./frontend/custom-type.md)
+- [Type alias](./frontend/type-alias.md)
 - [Installing Rust](./install-rust.md)
