@@ -6,4 +6,5 @@
 - [A first flash card](./frontend/first-flash.md)
 - [A custom function](./frontend/custom-function.md)
 - [Type annotations](./frontend/type-annotations.md)
+- [Namespaces](./frontend/namespaces.md)
 - [Installing Rust](./install-rust.md)
