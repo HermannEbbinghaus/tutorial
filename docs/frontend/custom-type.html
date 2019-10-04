@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Skeletal Elm project - Flashcard; A tutorial</title>
+        <title>A custom type - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html" class="active"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">8.</strong> A custom type</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">9.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/custom-type.html" class="active"><strong aria-hidden="true">8.</strong> A custom type</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">9.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,62 +145,54 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#skeletal-elm-project" id="skeletal-elm-project">Skeletal Elm project</a></h1>
-<p>With all the <code>Elm</code> tools installed. It is time to take them for a spin. Right
-from the Elm is a very friendly language. When you ask Elm for help</p>
-<pre><code class="language-sh">elm --help
-</code></pre>
-<p>It will thank you for trying out Elm, give you some pointers where to find
-<a href="https://guide.elm-lang.org">more information</a> and tell you about some command options. We are
-interested in the <code>elm init</code> command. It promises to</p>
+                        <h1><a class="header" href="#a-custom-type" id="a-custom-type">A custom type</a></h1>
+<p>We annotated our <code>view</code> function with it's type, but something does not feel
+right. Shouldn't a flash card have a front and a back? Just a single <code>String</code>
+does not cut it.</p>
+<p>Let's remedy this with a <a href="https://guide.elm-lang.org/core_language.html">record</a>.</p>
+<h2><a class="header" href="#records" id="records">Records</a></h2>
+<p>A record</p>
 <blockquote>
-<p>Start an Elm project. It creates a starter elm.json file and provides a link
-explaining what to do from there.</p>
+<p>can hold many values, and each value is associated with a name.</p>
 </blockquote>
-<p>This is a nice starting point. Run the command to start an Elm project. The
-skeletal project creates the following files and directories.</p>
-<pre><code class="language-plain">.
-├── elm.json
-└── src
+<p>Our flash card has a front and a back, so describe the flash card type with
+record seems a nice fit.</p>
+<p>Instead of accepting a <code>String</code> as the argument to our <code>view</code> function, we
+should accept a record that has a <code>front</code> and a <code>back</code>.</p>
+<pre><code class="language-elm">view : { front : String, back : String } -&gt; Html ()
 </code></pre>
-<p>The <code>elm.json</code> describes the Elm project. We describe it in more detail later in
-the tutorial. Besides the <code>elm.json</code> file there is a directory called <code>src</code>.
-This is where all the source files go.</p>
-<p>An empty <code>src</code> directory is an unhappy <code>src</code> directory. So let's go ahead and
-create a file named <code>FlashCard.elm</code> inside the <code>src</code> directory with the
-following content</p>
-<pre><code class="language-elm">module Main exposing (main)
-
-import Html
-
-
-main =
-    Html.text &quot;Hello, World!&quot;
-
+<p>Now the argument name of <code>text</code> isn't very well chosen anymore. Lets change it
+to <code>card</code>.</p>
+<pre><code class="language-elm">view card =
+   ...
+</code></pre>
+<p>Since we renamed the argument from <code>text</code> to <code>card</code>, we can't use <code>text</code> in the
+body of the function anymore. Let's replace it with the front of the card</p>
+<pre><code class="language-elm">    div []
+        [ span [] [ Html.text card.front ]
+        ]
+</code></pre>
+<p>We now introduced a new type; a record with a <code>front</code> and a <code>back</code>, both of type
+<code>String</code>. But we haven't changed to argument we are calling the <code>view</code> function
+with.</p>
+<pre><code class="language-elm">main =
+    view { front = &quot;Wettervorhersage&quot;, back = &quot;Weather forecast&quot; }
 </code></pre>
 <h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>One of the cool things about Elm is that it can serve your files. By spinning up
-a reactor Elm will look at your files, create a web server, serve your files and
-when necessary compile them on the fly.</p>
-<pre><code class="language-sh">elm reactor
-</code></pre>
-<p>The above command will start the Elm reactor. The message that it returns with
-asks you to got to <a href="http://localhost:8000">http://localhost:8000</a>. Going to that
-address you will find a file navigation pane. Navigate it to <code>src</code> &gt;
-<code>FlashCard.elm</code> and be greeting by your very own <code>Hello, World!</code></p>
+<p>If you reload the web app once more. You should still see &quot;Wettervorhersage&quot;.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../install-elm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../frontend/namespaces.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../frontend/first-flash.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../install-rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -212,13 +204,13 @@ address you will find a file navigation pane. Navigate it to <code>src</code> &g
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../install-elm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../frontend/namespaces.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../frontend/first-flash.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../install-rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

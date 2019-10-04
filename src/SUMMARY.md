@@ -7,4 +7,5 @@
 - [A custom function](./frontend/custom-function.md)
 - [Type annotations](./frontend/type-annotations.md)
 - [Namespaces](./frontend/namespaces.md)
+- [A custom type](./frontend/custom-type.md)
 - [Installing Rust](./install-rust.md)
