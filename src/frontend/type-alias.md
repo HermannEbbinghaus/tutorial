@@ -16,7 +16,7 @@ type alias FlashCard =
 ```
 
 With the type alias introduced we can clean up the signature of the `view`
-function by changing it tongue
+function by changing it to
 
 ```elm
 view : FlashCard -> Html ()

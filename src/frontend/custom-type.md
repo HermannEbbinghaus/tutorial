@@ -1,52 +1,45 @@
 # A custom type
-We annotated our `view` function with it's type, but something does not feel
-right. Shouldn't a flash card have a front and a back? Just a single `String`
-does not cut it.
+We have created a fuller flash card. It has a front and a back. But what way is
+it facing? Are we seeing the front or the back?
 
-Let's remedy this with a [record][].
+If we want to differentiate we should be able to express the difference. We will
+do that with a custom type.
 
-## Records
-A record
-
-> can hold many values, and each value is associated with a name.
-
-Our flash card has a front and a back, so describe the flash card type with
-record seems a nice fit.
-
-Instead of accepting a `String` as the argument to our `view` function, we
-should accept a record that has a `front` and a `back`.
+## Face
+The following code introduces a new type `Face`. It will be used to determine
+which way our flashcard is facing.
 
 ```elm
-view : { front : String, back : String } -> Html ()
+type Face
+    = Front
+    | Back
 ```
 
-Now the argument name of `text` isn't very well chosen anymore. Lets change it
-to `card`.
+The `type` construct is an example of an [_algebraic data type_][adt]. That is a
+fancy name saying that there are certain ways of combining different types into
+more complex types. We will come back to that subject later on.
+
+## Extending `FlashCard`
+With a `Face` we should extend our `FlashCard` model. In the `FlashCard` type
+alias add a field `face` of type `Face`.
 
 ```elm
-view card =
-   ...
+type alias FlashCard =
+    { front : String
+    , back : String
+    , face : Face
+    }
 ```
 
-Since we renamed the argument from `text` to `card`, we can't use `text` in the
-body of the function anymore. Let's replace it with the front of the card
+This will break our program. This is because when we created a flash card we
+should also specify which way it is facing.
 
-```elm
-    div []
-        [ span [] [ Html.text card.front ]
-        ]
 ```
-
-We now introduced a new type; a record with a `front` and a `back`, both of type
-`String`. But we haven't changed to argument we are calling the `view` function
-with.
-
-```elm
-main =
-    view { front = "Wettervorhersage", back = "Weather forecast" }
+{ front = "Wettervorhersage", back = "Weather forecast", face = Front }
 ```
 
 ## Verification
-If you reload the web app once more. You should still see "Wettervorhersage".
+If it compiles, it should still show you "Wettervorhersage" when you reload the
+app. 
 
-[record]: https://guide.elm-lang.org/core_language.html
+[adt]: https://en.wikipedia.org/wiki/Algebraic_data_type
