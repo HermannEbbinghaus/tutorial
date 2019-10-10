@@ -10,4 +10,5 @@
 - [A record type](./frontend/record-type.md)
 - [Type alias](./frontend/type-alias.md)
 - [A custom type](./frontend/custom-type.md)
+- [A convenient function](./frontend/constructor.md)
 - [Installing Rust](./install-rust.md)

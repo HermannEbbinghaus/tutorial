@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="install-rust.html"><strong aria-hidden="true">11.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="install-rust.html"><strong aria-hidden="true">12.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -506,11 +506,44 @@ alias add a field <code>face</code> of type <code>Face</code>.</p>
 </code></pre>
 <p>This will break our program. This is because when we created a flash card we
 should also specify which way it is facing.</p>
-<pre><code>{ front = &quot;Wettervorhersage&quot;, back = &quot;Weather forecast&quot;, face = Front }
+<pre><code class="language-elm">{ front = &quot;Wettervorhersage&quot;, back = &quot;Weather forecast&quot;, face = Front }
 </code></pre>
 <h2><a class="header" href="#verification-8" id="verification-8">Verification</a></h2>
 <p>If it compiles, it should still show you &quot;Wettervorhersage&quot; when you reload the
 app. </p>
+<h1><a class="header" href="#a-convenient-function" id="a-convenient-function">A convenient function</a></h1>
+<p>If we want to create a flash card we have to write</p>
+<pre><code class="language-elm">{ front = &quot;Wettervorhersage&quot;, back = &quot;Weather forecast&quot;, face = Front }
+</code></pre>
+<p>That is a whooping 71 characters. Most of these characters are boilerplate.
+Can't we do better than that?</p>
+<h2><a class="header" href="#functions-to-the-rescue" id="functions-to-the-rescue">Functions to the rescue</a></h2>
+<p>Of course we can do better. We can create a function that helps us with creating
+a flash card.</p>
+<p>Let's think about a name for the function. It creates a flash card so
+<code>flash_card</code> seems appropriate.</p>
+<p>Having settled on the name let's think about the signature. We would create
+flash cards facing <code>Front</code>. So the only parts that are moving are the front and
+the back.
+This means our functions needs to accept two <code>String</code>s and returns a
+<code>FlashCard</code>. The way the describe that in Elm is</p>
+<pre><code class="language-elm">flash_card : String -&gt; String -&gt; FlashCard
+</code></pre>
+<p>It needs some getting used to, but there are good reasons why the signature
+looks the way it does.</p>
+<p>With the signature in place, we can go on to defining the function.</p>
+<pre><code class="language-elm">flash_card front back =
+    { front = front, back = back, face = Front }
+</code></pre>
+<h2><a class="header" href="#verification-9" id="verification-9">Verification</a></h2>
+<p>We can now use the <code>flash_card</code> function. We do need some parenthesis, or else
+Elm will get confused.</p>
+<pre><code class="language-elm">`main =
+    view (flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;)
+</code></pre>
+<p>Other than that, everything should still work. As an other verification: what if
+we wanted to pass which way the flash card is facing to our <code>flash_card</code>
+function, how would the signature change?</p>
 <h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
 <p>We will use <a href="https://www.rust-lang.org/">Rust</a> to create a web server. Before we can start writing our
 web server, we should install Rust.</p>
@@ -522,7 +555,7 @@ you to have multiple different versions of Rust live next to each other.</p>
 questions. Make sure you read and understand what the script will try to
 achieve. For this tutorial no customization is necessary.</p>
 <p>When the scripts finished Rust is installed. This comes with a couple of tools.</p>
-<h2><a class="header" href="#verification-9" id="verification-9">Verification</a></h2>
+<h2><a class="header" href="#verification-10" id="verification-10">Verification</a></h2>
 <p>To make sure that the installation was successful the following commands should
 run without error.</p>
 <pre><code class="language-sh">cargo --version

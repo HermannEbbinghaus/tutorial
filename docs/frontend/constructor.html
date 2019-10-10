@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Type annotations - Flashcard; A tutorial</title>
+        <title>A convenient function - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html" class="active"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">12.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html" class="active"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">12.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,66 +145,52 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#type-annotations" id="type-annotations">Type annotations</a></h1>
-<p>We have just created a custom function. It is lacking one of the Elm strongest
-features. I.e. <a href="https://en.wikipedia.org/wiki/Data_type"><em>type information</em></a>.</p>
-<p>Types help a compiler to determine if programs are correct. They can be used to
-verify that the expectations you have about functions and programs are met, even
-before the program is run.</p>
-<p>Up until now, Elm has <em>inferred</em> the types of our functions. But relying on the
-type inference could hide some problems. So let's annotate our <code>view</code> function
-with it's type.</p>
-<h2><a class="header" href="#common-types" id="common-types">Common types</a></h2>
-<p>Elm has some built in types that you can use right out of the gate. One that we
-already have used is <a href="https://package.elm-lang.org/packages/elm/core/latest/String"><code>String</code></a>. It is a chunk of text. Elm also
-provides a myriad of functions for <code>String</code> but now we are only interested in
-it's type.</p>
-<p>Remember that Elm is a <a href="https://en.wikipedia.org/wiki/Functional_programming">functional language</a>? Because functions are
-so important you can provide type information for them as well. This is done
-with an arrow <code>-&gt;</code>.</p>
-<p>On the left side of the arrow you place the type of the argument of the
-function. To the right of the arrow you place the type of the return value. But
-what is that? Let's guess it to by <code>String</code> and see what Elm makes of it.</p>
-<p>Providing type information for the <code>view</code> function is done by</p>
-<pre><code class="language-elm">view : String -&gt; String
+                        <h1><a class="header" href="#a-convenient-function" id="a-convenient-function">A convenient function</a></h1>
+<p>If we want to create a flash card we have to write</p>
+<pre><code class="language-elm">{ front = &quot;Wettervorhersage&quot;, back = &quot;Weather forecast&quot;, face = Front }
 </code></pre>
-<p>This is placed right above the definition of the <code>view</code> function.</p>
+<p>That is a whooping 71 characters. Most of these characters are boilerplate.
+Can't we do better than that?</p>
+<h2><a class="header" href="#functions-to-the-rescue" id="functions-to-the-rescue">Functions to the rescue</a></h2>
+<p>Of course we can do better. We can create a function that helps us with creating
+a flash card.</p>
+<p>Let's think about a name for the function. It creates a flash card so
+<code>flash_card</code> seems appropriate.</p>
+<p>Having settled on the name let's think about the signature. We would create
+flash cards facing <code>Front</code>. So the only parts that are moving are the front and
+the back.
+This means our functions needs to accept two <code>String</code>s and returns a
+<code>FlashCard</code>. The way the describe that in Elm is</p>
+<pre><code class="language-elm">flash_card : String -&gt; String -&gt; FlashCard
+</code></pre>
+<p>It needs some getting used to, but there are good reasons why the signature
+looks the way it does.</p>
+<p>With the signature in place, we can go on to defining the function.</p>
+<pre><code class="language-elm">flash_card front back =
+    { front = front, back = back, face = Front }
+</code></pre>
 <h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>If you reload the application you will be greated by a friendly message from the
-Elm compiler</p>
-<blockquote>
-<p>-- TYPE MISMATCH --------------------------------------------- src/FlashCard.elm</p>
-<p>Something is off with the body of the <code>view</code> definition:</p>
-<p>11|&gt;    Html.div []
-12|&gt;        [ Html.span [] [ Html.text text ]
-13|&gt;        ]</p>
-<p>This <code>div</code> call produces:</p>
-<pre><code>Html.Html msg
+<p>We can now use the <code>flash_card</code> function. We do need some parenthesis, or else
+Elm will get confused.</p>
+<pre><code class="language-elm">`main =
+    view (flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;)
 </code></pre>
-<p>But the type annotation on <code>view</code> says it should be:</p>
-<pre><code>String
-</code></pre>
-</blockquote>
-<p>We guessed the return type for the <code>view</code> function to be <code>String</code>. But that is not
-correct. Elm noticed that the type difference from what actually is returned.
-Let's change the type signature of the <code>view</code> function to</p>
-<pre><code class="language-elm">view : String -&gt; Html.Html ()
-</code></pre>
-<p>for now. We will go into the convoluted <code>Html.Html ()</code> later.</p>
-<p>Once you reload the application again. You should be greeted by &quot;Wettervorhersage&quot;.</p>
+<p>Other than that, everything should still work. As an other verification: what if
+we wanted to pass which way the flash card is facing to our <code>flash_card</code>
+function, how would the signature change?</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../frontend/custom-function.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../frontend/custom-type.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../frontend/namespaces.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../install-rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -216,13 +202,13 @@ Let's change the type signature of the <code>view</code> function to</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../frontend/custom-function.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../frontend/custom-type.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../frontend/namespaces.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../install-rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

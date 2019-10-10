@@ -34,7 +34,7 @@ type alias FlashCard =
 This will break our program. This is because when we created a flash card we
 should also specify which way it is facing.
 
-```
+```elm
 { front = "Wettervorhersage", back = "Weather forecast", face = Front }
 ```
 
