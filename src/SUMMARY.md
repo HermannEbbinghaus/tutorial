@@ -11,4 +11,5 @@
 - [Type alias](./frontend/type-alias.md)
 - [A custom type](./frontend/custom-type.md)
 - [A convenient function](./frontend/constructor.md)
+- [Showing the back](./frontend/let-block.md)
 - [Installing Rust](./install-rust.md)

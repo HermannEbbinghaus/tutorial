@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="install-rust.html"><strong aria-hidden="true">12.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="install-rust.html"><strong aria-hidden="true">13.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -544,6 +544,56 @@ Elm will get confused.</p>
 <p>Other than that, everything should still work. As an other verification: what if
 we wanted to pass which way the flash card is facing to our <code>flash_card</code>
 function, how would the signature change?</p>
+<h1><a class="header" href="#showing-the-back" id="showing-the-back">Showing the back</a></h1>
+<p>We have been staring at Wettervorhersage for a while now. We would like to
+convince ourselves that we still know it's translation. Time to leverage the
+<code>face</code> of our <code>FlashCard</code> and show a different side.</p>
+<h2><a class="header" href="#let-expression" id="let-expression">Let expression</a></h2>
+<p>In our view function we hard-coded to show the front of the flash card.</p>
+<pre><code class="language-elm">view card =
+    div []
+        [ span [] [ Html.text card.front ]
+        ]
+</code></pre>
+<p>We like to be able to change which text we show depending on the face that is
+showing. For this we are going to introduce a <a href="https://elm-lang.org/docs/syntax#let-expressions"><code>let</code>-expression</a> in our
+<code>view</code> function.</p>
+<p>A <code>let</code> expression is useful when</p>
+<blockquote>
+<p>when an expression is getting large. You can make a let to break it into
+smaller definitions and put them all together in a smaller expression. </p>
+</blockquote>
+<p>We first use it to introduce a name for the text we want to show.</p>
+<pre><code class="language-elm">view card =
+    let
+        text = card.front
+     div []
+        [ span [] [ Html.text text ]
+        ]
+
+</code></pre>
+<p>In it self this isn't a big change. It only allows us to define a name. But the
+value we bind this name is now under our control.</p>
+<h2><a class="header" href="#showing-the-back-1" id="showing-the-back-1">Showing the back</a></h2>
+<p>We would like to show the a different text when we face the back.We can achieve
+that by matching on the flash cards face.</p>
+<pre><code class="language-elm">text =
+    case card.face of
+        Front -&gt;
+            card.front
+
+        Back -&gt;
+            card.back
+</code></pre>
+<p>this makes use of new concept: <a href="https://guide.elm-lang.org/types/pattern_matching.html">Pattern matching</a>. A <code>case</code> expression</p>
+<blockquote>
+<p>allows us to branch based on which variant we happen to see.</p>
+</blockquote>
+<p>So if our card faces <code>Front</code> we want our card to show the <code>card.front</code>. And when
+it faces <code>Back</code> we want to see <code>card.back</code>.</p>
+<h2><a class="header" href="#verification-10" id="verification-10">Verification</a></h2>
+<p>Make a prediction what would happen when you reload the web application. If your
+prediction matches the reality you probably know what is up next.</p>
 <h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
 <p>We will use <a href="https://www.rust-lang.org/">Rust</a> to create a web server. Before we can start writing our
 web server, we should install Rust.</p>
@@ -555,7 +605,7 @@ you to have multiple different versions of Rust live next to each other.</p>
 questions. Make sure you read and understand what the script will try to
 achieve. For this tutorial no customization is necessary.</p>
 <p>When the scripts finished Rust is installed. This comes with a couple of tools.</p>
-<h2><a class="header" href="#verification-10" id="verification-10">Verification</a></h2>
+<h2><a class="header" href="#verification-11" id="verification-11">Verification</a></h2>
 <p>To make sure that the installation was successful the following commands should
 run without error.</p>
 <pre><code class="language-sh">cargo --version
@@ -590,7 +640,7 @@ of this writing that was <code>1.38.0</code>.</p>
         
         <!-- Livereload script (if served using the cli tool) -->
         <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
+            var socket = new WebSocket("ws://localhost:35174");
             socket.onmessage = function (event) {
                 if (event.data === "reload") {
                     socket.close();
