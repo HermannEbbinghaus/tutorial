@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="install-rust.html"><strong aria-hidden="true">14.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="install-rust.html"><strong aria-hidden="true">15.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -662,6 +662,42 @@ flash card to the <code>flip</code> function via the <code>|&gt;</code> operator
 function is in its turn passed to the <code>view</code> function via the same <code>|&gt;</code>
 operator.</p>
 <p>We will take a closer look at the <code>|&gt;</code> operator and other functions.</p>
+<h1><a class="header" href="#elm-architecture" id="elm-architecture">Elm Architecture</a></h1>
+<p>We are capable to flip a card, but we want to control when we flip it. At the
+moment we are only generating static content. How does Elm allow values to
+change.</p>
+<p>In this chapter we will look into the <em>Elm architecture</em>.</p>
+<h2><a class="header" href="#model-view-update" id="model-view-update">Model-View-Update</a></h2>
+<p>The <a href="https://guide.elm-lang.org/architecture/">Elm architecture</a> is a pattern that help in structuring
+an interactive application.</p>
+<p>It revolves around a Model, a View and a way to Update the model. Two of the
+parts are in place already. Our model is a <code>FlashCard</code> with <code>view</code> as it's View
+function.</p>
+<p>What is missing is the Update function and how it interacts with Elm.</p>
+<h2><a class="header" href="#pure-functions" id="pure-functions">Pure functions</a></h2>
+<p>Functions in Elm are <em>pure</em>. A pure function is</p>
+<blockquote>
+<p>a function that has the following properties:</p>
+<ol>
+<li>Its return value is the same for the same arguments (no variation with
+local static variables, non-local variables, mutable reference arguments or
+input streams from I/O devices). </li>
+<li>Its evaluation has no side effects (no mutation of local static variables,
+non-local variables, mutable reference arguments or I/O streams).</li>
+</ol>
+</blockquote>
+<p>This property has some nice benefits. But how do we change things, if functions
+should always return the same on the same input?</p>
+<h2><a class="header" href="#elm-runtime" id="elm-runtime">Elm runtime</a></h2>
+<p>The Elm runtime is the escape hatch that allows change in our web app. The
+runtime is responsible for the Model. It will use a View function to show our
+application. It will Update the model in the way we tell it to.</p>
+<p>The way we tell it to is by sending a Message. This Message allows the Update
+function to differentiate how to update the model.</p>
+<p>We will be sending Message from the application, e.g. by clicking a button.</p>
+<p>This probably all sounds very abstract. It will become clear in the next
+chapter. Note that every Elm application is structured, even recursively, with
+the Elm architecture. This helps developers in managing their code base.</p>
 <h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
 <p>We will use <a href="https://www.rust-lang.org/">Rust</a> to create a web server. Before we can start writing our
 web server, we should install Rust.</p>

@@ -13,4 +13,5 @@
 - [A convenient function](./frontend/constructor.md)
 - [Showing the back](./frontend/let-block.md)
 - [Flip the card](./frontend/flip.md)
+- [Elm Architecture](./frontend/architecture.md)
 - [Installing Rust](./install-rust.md)
