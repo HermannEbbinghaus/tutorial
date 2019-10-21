@@ -12,4 +12,5 @@
 - [A custom type](./frontend/custom-type.md)
 - [A convenient function](./frontend/constructor.md)
 - [Showing the back](./frontend/let-block.md)
+- [Flip the card](./frontend/flip.md)
 - [Installing Rust](./install-rust.md)
