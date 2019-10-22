@@ -14,4 +14,5 @@
 - [Showing the back](./frontend/let-block.md)
 - [Flip the card](./frontend/flip.md)
 - [Elm Architecture](./frontend/architecture.md)
+- [Updating the model](./frontend/update.md)
 - [Installing Rust](./install-rust.md)

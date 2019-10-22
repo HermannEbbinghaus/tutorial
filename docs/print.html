@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="install-rust.html"><strong aria-hidden="true">15.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="install-rust.html"><strong aria-hidden="true">16.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -698,6 +698,68 @@ function to differentiate how to update the model.</p>
 <p>This probably all sounds very abstract. It will become clear in the next
 chapter. Note that every Elm application is structured, even recursively, with
 the Elm architecture. This helps developers in managing their code base.</p>
+<h1><a class="header" href="#updating-the-model" id="updating-the-model">Updating the model</a></h1>
+<p>Let's work on applying the Elm architecture and update the model.</p>
+<h2><a class="header" href="#message" id="message">Message</a></h2>
+<p>We first start to think about the message our model understands. At the moment
+we are only interested in flipping a card. A good message would be <code>Flip</code>. Let's
+start from there</p>
+<pre><code class="language-elm">type Message
+    = Flip
+</code></pre>
+<p>Now we created the ability to express the fact that we want to change our model.</p>
+<h2><a class="header" href="#model" id="model">Model</a></h2>
+<p>We keep talking about our model. We know that it is a flash card, but that could
+change in the future. Aligning our code with the Elm way has some benefits. So
+let's introduce an alias.</p>
+<pre><code class="language-elm">type alias Model =
+    FlashCard
+</code></pre>
+<p>This way we can talk about <code>Model</code> in our signatures and it will align with Elm,
+but we haven't lost the ability to address is as a <code>FlashCard</code>.</p>
+<h2><a class="header" href="#update" id="update">Update</a></h2>
+<p>Let's create an <code>update</code> function. The signature of the update model is
+determined by Elm. It should benefits</p>
+<pre><code class="language-elm">update : Message -&gt; Model -&gt; Model
+</code></pre>
+<p>We give it a <code>Message</code> and a <code>Model</code>. Update will return a <code>Model</code> depending on
+the two. The implementation is straight forward, since there is only one
+instance of the <code>Message</code> type.</p>
+<pre><code class="language-elm">update message model =
+    case message of
+        Flip -&gt;
+            flip model
+</code></pre>
+<p>Match on the message, and for each case, even when there is only one, determine
+what to do. The <code>flip</code> function is what we need in the <code>Flip</code> case.</p>
+<h2><a class="header" href="#wire-it-all-together" id="wire-it-all-together">Wire it all together</a></h2>
+<p>Now we need to tell Elm how these parts work together. There is a 
+<a href="https://package.elm-lang.org/packages/elm/browser/latest/"><code>Browser</code> module</a> that offers different programs. We will be
+interested in <code>sandbox</code>.</p>
+<p>In order to be able to use the <code>Browser</code> module we need to import it.</p>
+<pre><code class="language-elm">import Browser
+</code></pre>
+<p>The sandbox needs a structure with the following fields</p>
+<ul>
+<li><code>init</code>. The initial model.</li>
+<li><code>view</code>. The view function used to display the model.</li>
+<li><code>update</code>. an finally the update function used.</li>
+</ul>
+<p>We all have those in place. So we can</p>
+<h2><a class="header" href="#verification-12" id="verification-12">Verification</a></h2>
+<p>Change the <code>main</code> variable to</p>
+<pre><code class="language-elm">main =
+    let
+        model =
+            flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;
+    in
+    Browser.sandbox
+        { init = model
+        , view = view
+        , update = update
+        }
+</code></pre>
+<p>And now we can finally flip the flash card.</p>
 <h1><a class="header" href="#installing-rust" id="installing-rust">Installing Rust</a></h1>
 <p>We will use <a href="https://www.rust-lang.org/">Rust</a> to create a web server. Before we can start writing our
 web server, we should install Rust.</p>
@@ -709,7 +771,7 @@ you to have multiple different versions of Rust live next to each other.</p>
 questions. Make sure you read and understand what the script will try to
 achieve. For this tutorial no customization is necessary.</p>
 <p>When the scripts finished Rust is installed. This comes with a couple of tools.</p>
-<h2><a class="header" href="#verification-12" id="verification-12">Verification</a></h2>
+<h2><a class="header" href="#verification-13" id="verification-13">Verification</a></h2>
 <p>To make sure that the installation was successful the following commands should
 run without error.</p>
 <pre><code class="language-sh">cargo --version
