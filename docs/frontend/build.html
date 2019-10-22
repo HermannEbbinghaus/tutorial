@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Flip the card - Flashcard; A tutorial</title>
+        <title>Building the frontend - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html" class="active"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li></ol>
+                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html" class="active"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,87 +145,46 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#flip-the-card" id="flip-the-card">Flip the card</a></h1>
-<p>When we reloaded the application we still saw Wettervorhersage. The reason for
-this is that the model we are viewing hasn't changed. In order to see something
-different we need to flip the card.</p>
-<h2><a class="header" href="#a-flip-function" id="a-flip-function">A <code>flip</code> function</a></h2>
-<p>Let's create a function that will do the flipping for us. We start by thinking
-about the signature, i.e. what goes in the function and what should come out.
-Since we want to flip a <code>FlashCard</code> picking that as a argument to our function
-makes sense. The result should be a <code>FlashCard</code> again. So our <code>flip</code> function
-has a signature of</p>
-<pre><code class="language-elm">flip: FlashCard -&gt; FlashCard
-</code></pre>
-<p>When we start thinking of the implementation we quickly run into the problem of
-determining the opposite of a face. I.e. when we are facing <code>Front</code> the opposite
-should be <code>Back</code> and vice versa.</p>
-<p>Let's cater to that now and so that we can use that function in the definition
-of <code>flip</code>.</p>
-<h2><a class="header" href="#an-opposite-function" id="an-opposite-function">An <code>opposite</code> function</a></h2>
-<p>Again, we start thinking of the signature of our function. In should go a <code>Face</code>
-and out should come a <code>Face</code> again.</p>
-<pre><code class="language-elm">opposite: Face -&gt; Face
-</code></pre>
-<p>We just learned about the <code>let</code>-expression, which comes in handy now. Because it
-allows us to determine which value occurs so we can take action accordingly.</p>
-<pre><code class="language-elm">opposite : Face -&gt; Face
-opposite face =
-    case face of
-        Front -&gt;
-            Back
+                        <h1><a class="header" href="#building-the-frontend" id="building-the-frontend">Building the frontend</a></h1>
+<p>A browser can not execute Elm. We first must make our Elm code into a form that
+the browser will understand.</p>
+<p>Luckily the <code>elm</code> command knows how to do that.</p>
+<h2><a class="header" href="#elm-make" id="elm-make"><code>elm</code> make</a></h2>
+<p>There is a sub-command that is able to create files that the browser knows
+about. It is called <code>elm make</code>. Running <code>elm make --help</code> show </p>
+<pre><code class="language-plain">The `make` command compiles Elm code into JS or HTML:
 
-        Back -&gt;
-            Front
+    elm make &lt;zero-or-more-elm-files&gt;
+
+For example:
+
+    elm make src/Main.elm
+
+This tries to compile an Elm file named src/Main.elm, putting the resulting
+JavaScript code in an elm.js file.
 </code></pre>
-<h2><a class="header" href="#flip-reloaded" id="flip-reloaded"><code>flip</code> reloaded</a></h2>
-<p>With a new brush in our art kit we are able to continue our implementation of
-<code>flip</code>. We should return a <code>FlashCard</code> with the same front and back as our
-input, but with the opposite face.</p>
-<pre><code class="language-elm">flip card =
-    { front = card.front, back = card.back , face = opposite card.face }
+<p>We left out the flags that can be passed to this sub command.</p>
+<p>Let's use the sub command to make an <code>index.html</code>. This way we don't need to
+reactor to show our app.</p>
+<pre><code class="language-sh">elm make src/FlashCard.elm
 </code></pre>
-<p>Pfew, that was a lot of typing. Isn't there a better way? I certainly would not
-want to type all those fields if our model grows.</p>
-<h2><a class="header" href="#flip-revolutions" id="flip-revolutions"><code>flip</code> revolutions</a></h2>
-<p>Luckily Elm allows that. It basically allows us to say; take this flashcard and
-only modify the fields we are interested in. The syntax is shown below and is
-exactly similar to the code above.</p>
-<pre><code class="language-elm">flip card =
-    { card | face = opposite card.face }
-</code></pre>
-<p>Sweet!</p>
+<p>The command above should create an <code>index.html</code> in the current work directory.</p>
 <h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>We have a <code>flip</code> function, but we need to use it. </p>
-<pre><code class="language-elm">main =
-    view (flip (flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;))
-</code></pre>
-<p>Reloading the web application now will show &quot;Weather forecast&quot;, but at a cost of
-a lot of parenthesis. Elm has a way to form a <a href="https://elm-lang.org/docs/syntax#operators">pipeline</a>. Below you can see
-how it works.</p>
-<pre><code class="language-elm">main =
-    flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;
-        |&gt; flip
-        |&gt; view
-</code></pre>
-<p>Here we first create a flash card with the <code>flash_card</code> function. We pass that
-flash card to the <code>flip</code> function via the <code>|&gt;</code> operator. The result of the flip
-function is in its turn passed to the <code>view</code> function via the same <code>|&gt;</code>
-operator.</p>
-<p>We will take a closer look at the <code>|&gt;</code> operator and other functions.</p>
+<p>Open the just generated <code>index.html</code> with a browser, and check that
+Wettervorhersage still means Weather forecast.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../frontend/let-block.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../frontend/update.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../frontend/architecture.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../install-rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -237,13 +196,13 @@ operator.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../frontend/let-block.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../frontend/update.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../frontend/architecture.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../install-rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

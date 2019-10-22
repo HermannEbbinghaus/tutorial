@@ -15,4 +15,5 @@
 - [Flip the card](./frontend/flip.md)
 - [Elm Architecture](./frontend/architecture.md)
 - [Updating the model](./frontend/update.md)
+- [Building the frontend](./frontend/build.md)
 - [Installing Rust](./install-rust.md)
