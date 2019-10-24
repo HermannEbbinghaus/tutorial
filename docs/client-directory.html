@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Type alias - Flashcard; A tutorial</title>
+        <title>Creating a client directory - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -11,21 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="shortcut icon" href="../favicon.png">
-        <link rel="stylesheet" href="../css/variables.css">
-        <link rel="stylesheet" href="../css/general.css">
-        <link rel="stylesheet" href="../css/chrome.css">
-        <link rel="stylesheet" href="../css/print.css" media="print">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -35,7 +35,7 @@
     <body class="light">
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "../";
+            var path_to_root = "";
             var default_theme = "light";
         </script>
 
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html" class="active"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html" class="active"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -113,7 +113,7 @@
                         <h1 class="menu-title">Flashcard; A tutorial</h1>
 
                         <div class="right-buttons">
-                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
                             
@@ -145,41 +145,26 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#type-alias" id="type-alias">Type alias</a></h1>
-<p>Our flash card type now is <code>{ front : String, back : String }</code> which, to say the
-least, does not roll off the tongue easily. Instead we would like to name our
-flash card type <code>FlashCard</code>.</p>
-<p>This can be achieved with a <em>type alias</em>. A type alias will introduce a name
-for a different type. This has several benefits. Among them it allows you to
-have a recognizable name for a type.</p>
-<p>If you want to introduce a type alias you use the <code>type alias</code> keywords. In our
-case you could use it like</p>
-<pre><code class="language-elm">type alias FlashCard =
-    { front : String, back : String }
-</code></pre>
-<p>With the type alias introduced we can clean up the signature of the <code>view</code>
-function by changing it to</p>
-<pre><code class="language-elm">view : FlashCard -&gt; Html ()
-</code></pre>
+                        <h1><a class="header" href="#creating-a-client-directory" id="creating-a-client-directory">Creating a client directory</a></h1>
+<p>What we have been working on up until now is the client for our application.
+With Rust installed, we quickly will move into writing server code. We better
+setup our project source tree to reflect our intentions.</p>
+<p>This entails little more than to creating a <code>client</code> directory and moving our
+stuff over there.</p>
 <h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>Fundamentally, nothing changed to the program, we only introduced a name for a
-familiar thing. The application should still show &quot;Wettervorhersage&quot; when
-reloaded.</p>
+<p>Make sure that running the Elm reactor, or building the frontend still works as
+expected.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../frontend/record-type.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="install-rust.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../frontend/custom-type.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -189,15 +174,11 @@ reloaded.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../frontend/record-type.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="install-rust.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a href="../frontend/custom-type.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
@@ -225,14 +206,14 @@ reloaded.</p>
         
 
         
-        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         

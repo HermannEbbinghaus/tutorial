@@ -17,3 +17,4 @@
 - [Updating the model](./frontend/update.md)
 - [Building the frontend](./frontend/build.md)
 - [Installing Rust](./install-rust.md)
+- [Creating a client directory](./client-directory.md)
