@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -848,6 +848,55 @@ source file scaffold.</p>
 <pre><code class="language-sh">cargo run
 </code></pre>
 <p>command. This will compile your sources and greet you with a friendly <code>Hello, world!</code>.</p>
+<h1><a class="header" href="#simple-server" id="simple-server">Simple Server</a></h1>
+<p>In this chapter we are going to create a simple server. Our goal is to make it
+greet us when we make a request.</p>
+<h2><a class="header" href="#gotham" id="gotham">Gotham</a></h2>
+<p>We will be leveraging the Rust eco-system instead of reinventing the wheel our
+self. There are a lot of packages available to us. They live at <a href="https://crates.io/">crates.io</a>.
+One of the packages we will be using is Gotham.</p>
+<p><a href="https://gotham.rs/">Gotham</a> is a</p>
+<blockquote>
+<p>flexible web framework that promotes stability, safety, security and speed.</p>
+</blockquote>
+<h2><a class="header" href="#add-dependency" id="add-dependency">Add dependency</a></h2>
+<p>Before we can use a package we need to declare it as a dependency. This is done
+in the <code>Cargo.toml</code>. We need to add our dependency to the <code>dependencies</code> table.</p>
+<pre><code class="language-toml">[dependencies]
+gotham = &quot;0.4.0&quot;
+</code></pre>
+<h2><a class="header" href="#hello-world" id="hello-world">Hello, world!</a></h2>
+<p>Next we will create a minimal server that responds with <code>Hello, world!</code> with
+every request.</p>
+<p>Change <code>main.rs</code> with</p>
+<pre><pre class="playpen"><code class="language-rust">extern crate gotham;
+
+use gotham::state::State;
+
+const HELLO_WORLD: &amp;'static str = &quot;Hello World!&quot;;
+
+pub fn say_hello(state: State) -&gt; (State, &amp;'static str) {
+    (state, HELLO_WORLD)
+}
+
+pub fn main() {
+    let addr = &quot;localhost:8886&quot;;
+    println!(&quot;Listening for requests at http://{}&quot;, addr);
+    gotham::start(addr, || Ok(say_hello))
+}
+</code></pre></pre>
+<p>This is taken from the hello-world example from the Gotham page.</p>
+<h2><a class="header" href="#verification-17" id="verification-17">Verification</a></h2>
+<p>Run the server with the command</p>
+<pre><code class="language-sh">cargo run
+</code></pre>
+<p>This will compile <code>main.rs</code> and the transitive dependencies. This can take some
+time. When it finishes it announces</p>
+<pre><code class="language-plain">Listening for requests at http://localhost:8886
+</code></pre>
+<p>Now open a browser and navigate to
+<a href="http://localhost:8886"><code>http://localhost:8886</code></a> and you will be greeted with an
+<code>Hello, world!</code>.</p>
 
                     </main>
 
