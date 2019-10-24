@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Skeletal Elm project - Flashcard; A tutorial</title>
+        <title>Serving the frontend - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html" class="active"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li></ol>
+                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html" class="active"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,64 +145,58 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#skeletal-elm-project" id="skeletal-elm-project">Skeletal Elm project</a></h1>
-<p>With all the <code>Elm</code> tools installed. It is time to take them for a spin. Right
-from the Elm is a very friendly language. When you ask Elm for help</p>
-<pre><code class="language-sh">elm --help
+                        <h1><a class="header" href="#serving-the-frontend" id="serving-the-frontend">Serving the frontend</a></h1>
+<p>Wouldn't it be interesting to serve the frontend from our server? Let's work on
+that in this chapter.</p>
+<p>For this it is best to have an <code>assets</code> directory that will hold all of our
+static assets. In the server directory create an <code>assets</code> directory and move the
+<code>index.html</code> to it.</p>
+<pre><code class="language-plain">assets/
+└── index.html
 </code></pre>
-<p>It will thank you for trying out Elm, give you some pointers where to find
-<a href="https://guide.elm-lang.org">more information</a> and tell you about some command options. We are
-interested in the <code>elm init</code> command. It promises to</p>
-<blockquote>
-<p>Start an Elm project. It creates a starter elm.json file and provides a link
-explaining what to do from there.</p>
-</blockquote>
-<p>This is a nice starting point. Run the command to start an Elm project. The
-skeletal project creates the following files and directories.</p>
-<pre><code class="language-plain">.
-├── elm.json
-└── src
-</code></pre>
-<p>The <code>elm.json</code> describes the Elm project. We describe it in more detail later in
-the tutorial. Besides the <code>elm.json</code> file there is a directory called <code>src</code>.
-This is where all the source files go.</p>
-<p>An empty <code>src</code> directory is an unhappy <code>src</code> directory. So let's go ahead and
-create a file named <code>FlashCard.elm</code> inside the <code>src</code> directory with the
-following content</p>
-<pre><code class="language-elm">module Main exposing (main)
-
-import Html
-
-
-main =
-    Html.text &quot;Hello, World!&quot;
-
-</code></pre>
+<h2><a class="header" href="#serving-static-files" id="serving-static-files">Serving static files</a></h2>
+<p>Gotham allows us to define a <em>router</em>. A router allows you to control which
+handlers get to handle certain requests. In order to use it we need some
+imports.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use gotham::router::builder::{build_simple_router, DefineSingleRoute, DrawRoutes};
+#}</code></pre></pre>
+<p>We don't need the <code>HELLO_WORLD</code>, or <code>say_hello</code>, so we can get rid of it.
+Instead we will define the router to serve our <code>index.html</code>. We use the 
+<code>build_simple_router</code> factory for that.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let router = build_simple_router(|route|{
+    route.get(&quot;/&quot;).to_file(&quot;assets/index.html&quot;);
+});
+#}</code></pre></pre>
+<p>The <code>build_simple_router</code> accepts a <em>closure</em> that enables us to configure the
+routes. We want to respond with <code>index.html</code> when we make a get request.</p>
+<h2><a class="header" href="#server-with-routes" id="server-with-routes">Server with routes</a></h2>
+<p>We now need to start the server with our router.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+gotham::start(addr, router);
+#}</code></pre></pre>
 <h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>One of the cool things about Elm is that it can serve your files. By spinning up
-a reactor Elm will look at your files, create a web server, serve your files and
-when necessary compile them on the fly.</p>
-<pre><code class="language-sh">elm reactor
-</code></pre>
-<p>The above command will start the Elm reactor. The message that it returns with
-asks you to got to <a href="http://localhost:8000">http://localhost:8000</a>. Going to that
-address you will find a file navigation pane. Navigate it to <code>src</code> &gt;
-<code>FlashCard.elm</code> and be greeting by your very own <code>Hello, World!</code></p>
+<p>Restart the server by shutting it down and running <code>cargo run</code> again. This will
+recompile the server and start waiting for requests. Open your browser and open
+the application. It should serve the frontend application.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../install-elm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../backend/server.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../frontend/first-flash.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -212,15 +206,11 @@ address you will find a file navigation pane. Navigate it to <code>src</code> &g
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../install-elm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../backend/server.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a href="../frontend/first-flash.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
