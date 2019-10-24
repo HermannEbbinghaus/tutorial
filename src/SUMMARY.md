@@ -21,3 +21,4 @@
 - [Skeletal Rust project](./backend/skeletal-rust.md)
 - [Simple Server](./backend/server.md)
 - [Serving the frontend](./backend/serve.md)
+- [Testing Elm](./frontend/test.md)

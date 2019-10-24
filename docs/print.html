@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">22.</strong> Testing Elm</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -237,7 +237,7 @@ This is where all the source files go.</p>
 <p>An empty <code>src</code> directory is an unhappy <code>src</code> directory. So let's go ahead and
 create a file named <code>FlashCard.elm</code> inside the <code>src</code> directory with the
 following content</p>
-<pre><code class="language-elm">module Main exposing (main)
+<pre><code class="language-elm">module FlashCard exposing (..)
 
 import Html
 
@@ -938,6 +938,80 @@ gotham::start(addr, router);
 <p>Restart the server by shutting it down and running <code>cargo run</code> again. This will
 recompile the server and start waiting for requests. Open your browser and open
 the application. It should serve the frontend application.</p>
+<h1><a class="header" href="#testing-elm" id="testing-elm">Testing Elm</a></h1>
+<p>We would like to send data from the server to the client, interpret the data as
+a flash card. There are a lot of things that can go wrong. In order to gain some
+confidence that some things are going right, we can write automated tests.</p>
+<p>This chapter will setup everything that is needed to start writing tests for our
+Elm code.</p>
+<h2><a class="header" href="#using-elm-test" id="using-elm-test">Using <code>elm-test</code></a></h2>
+<p>We have installed <code>elm-test</code> but we haven't used it yet. Now is a good time. Go
+over to the <code>client</code> directory and run the following command</p>
+<pre><code class="language-sh">elm-test init
+</code></pre>
+<p>This will ask to update <code>elm.json</code> with packages that enable us to writing
+tests. Agree with the proposed plan. When the command finished there is a new
+directory <code>tests</code>.</p>
+<pre><code class="language-plain">tests/
+└── Example.elm
+</code></pre>
+<p>We can rename <code>Example.elm</code> to <code>FlashCardTest.elm</code></p>
+<h2><a class="header" href="#run-the-test-suite" id="run-the-test-suite">run the test suite</a></h2>
+<p>Running the test suite amounts to executing the command</p>
+<pre><code class="language-sh">elm-test
+</code></pre>
+<p>It responds with the following overview</p>
+<pre><code class="language-plain">TEST RUN INCOMPLETE because there is 1 TODO remaining
+
+Duration: 253 ms
+Passed:   0
+Failed:   0
+Todo:     1
+↓ FlashCardTest
+◦ TODO: Implement our first test. See https://package.elm-lang.org/packages/elm-explorations/test/latest for how to do this!
+</code></pre>
+<p>The reason it reports that there is a TODO is because the generated test file
+provided it. Let's change that</p>
+<h2><a class="header" href="#write-a-test" id="write-a-test">Write a Test</a></h2>
+<p>Replace the <code>todo</code> with the following code</p>
+<pre><code class="language-elm">    describe &quot;FlashCard&quot;
+        [ test &quot;updating a flash card with a `Flip` message flips the flash card&quot; &lt;|
+            \_ -&gt;
+                let
+                    a_flash_card =
+                        flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;
+
+                    expected =
+                        flip a_flash_card
+
+                    actual =
+                        update Flip a_flash_card
+                in
+                Expect.equal actual expected
+        ]
+</code></pre>
+<p>Let's start understanding this from the top. First is the <code>describe</code> function.
+It accepts a <code>String</code> that should tell you what is under test and a list of other
+tests.</p>
+<p>Next we see a <code>test</code> function. It also accepts a <code>String</code> that should tell you
+what we are testing. Furthermore, <code>test</code> accepts as it's second argument a
+function that can do the actual testing.</p>
+<p>In our case the function is a <em>closure</em>, i.e. an anonymous function. In the
+function we use a <code>let</code>-expression to set up some variable bindings which we use
+to express our expectations. This is achieved with the <code>Expect.equal</code> function.</p>
+<p>For this to work we need to import our precious <code>FlashCard</code> functions and types.
+We can do this with the following line</p>
+<pre><code class="language-elm">import FlashCard exposing (..)
+</code></pre>
+<h2><a class="header" href="#verification-19" id="verification-19">Verification</a></h2>
+<p>We have learned a lot about how a test is written, but does it work? Run the
+<code>elm-test</code> command and it should report</p>
+<pre><code class="language-plain">TEST RUN PASSED
+
+Duration: 214 ms
+Passed:   1
+Failed:   0
+</code></pre>
 
                     </main>
 

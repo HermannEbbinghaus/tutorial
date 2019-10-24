@@ -32,7 +32,7 @@ create a file named `FlashCard.elm` inside the `src` directory with the
 following content
 
 ```elm
-module Main exposing (main)
+module FlashCard exposing (..)
 
 import Html
 
