@@ -21,4 +21,5 @@
 - [Skeletal Rust project](./backend/skeletal-rust.md)
 - [Simple Server](./backend/server.md)
 - [Serving the frontend](./backend/serve.md)
+- [Decoding a FlashCard](./frontend/decode.md)
 - [Testing Elm](./frontend/test.md)

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Serving the frontend - Flashcard; A tutorial</title>
+        <title>Decoding a FlashCard - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html" class="active"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="../frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="../frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li></ol>
+                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="../frontend/decode.html" class="active"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="../frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,60 +145,104 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#serving-the-frontend" id="serving-the-frontend">Serving the frontend</a></h1>
-<p>Wouldn't it be interesting to serve the frontend from our server? Let's work on
-that in this chapter.</p>
-<p>For this it is best to have an <code>assets</code> directory that will hold all of our
-static assets. In the server directory create an <code>assets</code> directory and move the
-<code>index.html</code> to it.</p>
-<pre><code class="language-plain">assets/
-└── index.html
+                        <h1><a class="header" href="#decoding-a-flashcard" id="decoding-a-flashcard">Decoding a FlashCard</a></h1>
+<p>We would like the let the server decide which flash card to show. In order for
+that to work, we need to be able to receive JSON data and decode that into a
+<code>FlashCard</code>.</p>
+<p>This chapter we will be working on that.</p>
+<h2><a class="header" href="#json-package" id="json-package">json package</a></h2>
+<p>There is a <a href="https://package.elm-lang.org/packages/elm/json/latest/"><code>json</code> package</a> that will help us decode, and encode, JSON
+into datatypes that we are interested in. Before we can use it we need to
+install it.</p>
+<pre><code class="language-sh">elm install elm/json
 </code></pre>
-<h2><a class="header" href="#serving-static-files" id="serving-static-files">Serving static files</a></h2>
-<p>Gotham allows us to define a <em>router</em>. A router allows you to control which
-handlers get to handle certain requests. In order to use it we need some
-imports.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-use gotham::router::builder::{build_simple_router, DefineSingleRoute, DrawRoutes};
-#}</code></pre></pre>
-<p>We don't need the <code>HELLO_WORLD</code>, or <code>say_hello</code>, so we can get rid of it.
-Instead we will define the router to serve our <code>index.html</code>. We use the 
-<code>build_simple_router</code> factory for that.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-let router = build_simple_router(|route|{
-    route.get(&quot;/&quot;).to_file(&quot;assets/index.html&quot;);
-});
-#}</code></pre></pre>
-<p>The <code>build_simple_router</code> accepts a <em>closure</em> that enables us to configure the
-routes. We want to respond with <code>index.html</code> when we make a get request.</p>
-<h2><a class="header" href="#server-with-routes" id="server-with-routes">Server with routes</a></h2>
-<p>We now need to start the server with our router.</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-gotham::start(addr, router);
-#}</code></pre></pre>
+<h2><a class="header" href="#jsondecode" id="jsondecode"><code>Json.Decode</code></a></h2>
+<p>We will be using the <code>Json.Decode</code> module from the <code>json</code> package. Because we
+want to avoid typing <code>Json.Decode</code> everywhere when we want to refer to a type
+from that module, we are importing it with a different name.</p>
+<p>Since we will be defining a <code>Decoder</code> we will expose that type into our
+name space. </p>
+<pre><code class="language-elm">import Json.Decode as Decode exposing (Decoder)
+</code></pre>
+<h2><a class="header" href="#decoder" id="decoder"><code>Decoder</code></a></h2>
+<p>We want a <code>Decoder</code> for <code>FlashCard</code>. The type therefore should be</p>
+<pre><code class="language-elm">decode : Decoder FlashCard
+</code></pre>
+<p>Decoders work by composing primitive decoders into more elaborate once.
+Primitive decoders include</p>
+<ul>
+<li><code>Decode.string</code> that will decode a string value.</li>
+<li><code>Decode.int</code> that will decode an int value.</li>
+<li><code>Decode.bool</code> that will, well you can probably guess what type of value it
+decodes.</li>
+</ul>
+<p>More elaborate decoders are for example <code>Decode.map</code> or variants. It's signature
+is </p>
+<pre><code class="language-elm">Decode.map : (one -&gt; other) -&gt; Decoder one -&gt; Decoder other
+</code></pre>
+<p>It takes a function that maps one type into the other, a decoder for one and
+will produce a decoder for other. Under the cover the one decoder is used and
+when successful the transformation is applied to the result.</p>
+<h2><a class="header" href="#json" id="json">JSON</a></h2>
+<p>Below we will give an example of the JSON we expect to receive. It probably does
+not surprise you that it looks like</p>
+<pre><code class="language-json">{ &quot;front&quot;: &quot;Wettervorhersage&quot;, &quot;back&quot;: &quot;Weather forecast&quot;, &quot;face&quot;: &quot;front&quot; }
+</code></pre>
+<h2><a class="header" href="#decoder-flashcard" id="decoder-flashcard">Decoder FlashCard</a></h2>
+<p>We will create a decoder that will ignore the face field of the JSON. When we
+have a little more experience we will come back and decode that as well. That
+means that the decoder becomes</p>
+<pre><code class="language-elm">decode : Decoder FlashCard
+decode =
+    Decode.map3 FlashCard
+        (Decode.field &quot;front&quot; Decode.string)
+        (Decode.field &quot;back&quot; Decode.string)
+        (Decode.field &quot;face&quot; &lt;| Decode.succeed Front)
+</code></pre>
+<p>We use <code>Decode.map3</code> and the <code>FlashCard</code> constructor, which got automatically
+created when we introduced the type alias, to map three different values into a
+<code>FlashCard</code>.</p>
+<p>We extensively use the <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#field"><code>Decode.field</code></a> decoder. It</p>
+<blockquote>
+<p>decodes a JSON object, requiring a particular field. The object can have other
+fields. Lots of them! The only thing this decoder cares about is if a field is
+present and that the value there is an of a certain type. </p>
+</blockquote>
+<p>Lastly we use <code>Decode.succeed</code> to hard code the face value to be Front.</p>
 <h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>Restart the server by shutting it down and running <code>cargo run</code> again. This will
-recompile the server and start waiting for requests. Open your browser and open
-the application. It should serve the frontend application.</p>
+<p>We have created a decoder but how do we know that it behaves correctly? We can
+write a test to see if our decoder can decode some JSON.</p>
+<p>In <code>tests/FlashCardTest.elm</code> write the following code after our other test.</p>
+<pre><code class="language-elm">        , test &quot;decode a flash card from JSON&quot; &lt;|
+            \_ -&gt;
+                let
+                    input = &quot;&quot;&quot;{ &quot;front&quot;: &quot;Wettervorhersage&quot;, &quot;back&quot;: &quot;Weather forecast&quot;, &quot;face&quot;: &quot;back&quot; }&quot;&quot;&quot;
+
+                    expected =
+                        flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;
+                        |&gt; Ok
+
+                    actual =
+                        decodeString FlashCard.decode input
+                in
+                Expect.equal actual expected
+</code></pre>
+<p>and all the tests should still work when you import</p>
+<pre><code class="language-elm">import Json.Decode exposing (decodeString)
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../backend/server.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../backend/serve.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../frontend/decode.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../frontend/test.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -210,13 +254,13 @@ the application. It should serve the frontend application.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../backend/server.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../backend/serve.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../frontend/decode.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="../frontend/test.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
