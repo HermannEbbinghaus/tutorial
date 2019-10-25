@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="backend/serialize.html"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1180,6 +1180,83 @@ cargo build
 #}</code></pre></pre>
 <p>The command above should do just that. Other than given some warnings about our
 new code not being used, it should compile our code.</p>
+<h1><a class="header" href="#serialize-flashcard" id="serialize-flashcard">Serialize FlashCard</a></h1>
+<p>We have modeled flash cards on the server. We now need to turn it into JSON
+before we can send it to the client.</p>
+<p>In this chapter we will use <a href="https://docs.serde.rs/serde/">serde</a> to automatically serialize our flash
+cards.</p>
+<h2><a class="header" href="#dependency" id="dependency">Dependency</a></h2>
+<p>We will need two dependencies that we need to list in our <code>Cargo.toml</code>. Together
+they allow us to serialize flash cards into JSON. Add <code>serde</code> and <code>serde_json</code>
+to the dependencies table in <code>Cargo.toml</code>.</p>
+<pre><code class="language-toml">serde = { version = &quot;1.0.101&quot;, features = [ &quot;derive&quot; ] }
+sserde_json = &quot;1.0.41&quot;
+</code></pre>
+<h2><a class="header" href="#use-serde" id="use-serde">Use serde</a></h2>
+<p>In order to leverage the serialization capabilities of <code>serde_json</code> we need to
+create a <code>serde</code> serializer. There is a very cool trick that <code>serde</code> knows that
+makes this a breeze.</p>
+<p>The first thing we need to do is to announce we our needing <code>serde</code>.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use serde::Serialize;
+#}</code></pre></pre>
+<p>The other thing is that we need to tell <code>serde</code> that we would like it to
+<em>derive</em> serializers for our data types. We can do this by annotating both
+<code>FlashCard</code> and <code>Face</code> with a <code>derive</code> annotation. E.g. <code>Face</code> would be
+annotated like</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[derive(Serialize)]
+pub enum Face {
+    Front,
+    Back,
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#verification-22" id="verification-22">Verification</a></h2>
+<p>With the automatic part of serde done, it is good to see if serialization works
+like we expect. The best way to do this is to test is. Rust integrates testing
+right at the place where the source is created. Add the following code at the
+end of <code>src/domain/mod.rs</code>.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[cfg(test)]
+mod test {
+    use super::*;
+    use serde_json;
+
+    #[test]
+    fn flash_card_can_be_serialized_to_json() {
+        let flash_card = FlashCard::new(&quot;Wettervorhersage&quot;, &quot;Weather forecast&quot;);
+
+        let actual = serde_json::to_string(&amp;flash_card).unwrap();
+
+        let expected = r#&quot;{&quot;front&quot;:&quot;Wettervorhersage&quot;,&quot;back&quot;:&quot;Weather forecast&quot;,&quot;face&quot;:&quot;Front&quot;}&quot;#.to_owned();
+        assert_eq!(actual, expected);
+    }
+}
+#}</code></pre></pre>
+<p>There is some boilerplate to let the test framework know about what we want to
+test. The actual test is</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+        let flash_card = FlashCard::new(&quot;Wettervorhersage&quot;, &quot;Weather forecast&quot;);
+
+        let actual = serde_json::to_string(&amp;flash_card).unwrap();
+
+        let expected = r#&quot;{&quot;front&quot;:&quot;Wettervorhersage&quot;,&quot;back&quot;:&quot;Weather forecast&quot;,&quot;face&quot;:&quot;Front&quot;}&quot;#.to_owned();
+        assert_eq!(actual, expected);
+#}</code></pre></pre>
+<p>It creates a <code>FlashCard</code>, serializes it to JSON with <code>serde_json</code>, sets up an
+expectation, and checks it the expectation is met.</p>
+<p>If you run</p>
+<pre><code class="language-sh">cargo test
+</code></pre>
+<p>it should give the all green.</p>
 
                     </main>
 

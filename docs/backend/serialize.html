@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Namespaces - Flashcard; A tutorial</title>
+        <title>Serialize FlashCard - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html" class="active"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="../frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="../frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="../backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="../backend/serialize.html"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li></ol>
+                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="../frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="../frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="../backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="../backend/serialize.html" class="active"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,73 +145,94 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#namespaces" id="namespaces">Namespaces</a></h1>
-<p>We have just specified the return type of the <code>view</code> function to be 
-<code>Html.Html ()</code>. Why are there two mentions of <code>Html</code>? We will answer that
-question in this chapter.</p>
-<p>Look at the top of the file. There is an import line.</p>
-<pre><code class="language-elm">import Html
+                        <h1><a class="header" href="#serialize-flashcard" id="serialize-flashcard">Serialize FlashCard</a></h1>
+<p>We have modeled flash cards on the server. We now need to turn it into JSON
+before we can send it to the client.</p>
+<p>In this chapter we will use <a href="https://docs.serde.rs/serde/">serde</a> to automatically serialize our flash
+cards.</p>
+<h2><a class="header" href="#dependency" id="dependency">Dependency</a></h2>
+<p>We will need two dependencies that we need to list in our <code>Cargo.toml</code>. Together
+they allow us to serialize flash cards into JSON. Add <code>serde</code> and <code>serde_json</code>
+to the dependencies table in <code>Cargo.toml</code>.</p>
+<pre><code class="language-toml">serde = { version = &quot;1.0.101&quot;, features = [ &quot;derive&quot; ] }
+sserde_json = &quot;1.0.41&quot;
 </code></pre>
-<p>This imports the <a href="https://package.elm-lang.org/packages/elm/html/latest/"><code>Html</code> module</a> from the <code>Htmll</code> package. As can be
-seen from the documentation, this package provides a lot of useful functions.
-In order to use these functions you have to use there fully qualified name. E.g.
-if you want to use the function <code>div</code> that will render a div element on the
-page. You write</p>
-<pre><code class="language-elm">Html.div
-</code></pre>
-<p>The reason for using the fully qualified name is to avoid <em>name clashes</em>. Let's
-illustrate a name clash with an example.</p>
-<h2><a class="header" href="#favorite-number" id="favorite-number">Favorite number</a></h2>
-<p>We are going to ask somebody to create a module providing us with their
-favorite number. Kirsty told us that her favorite number is <code>42</code>. Daan favorite
-on the other hand is 37. We could create modules that record these favorites.</p>
-<p>We will settle on the name <code>number</code> to record the respective favorite number. If
-we wanted to use both numbers in one program, we would not have a problem. We
-can use fully qualify the name and we would still know which number we mean.</p>
-<p>If we wanted to use Kirsty's number we would write <code>Kirsty.number</code> and get 42.
-If instead we wanted to use Daan's number, we would wirte <code>Daan.number</code>.</p>
-<h2><a class="header" href="#second-html" id="second-html">Second <code>Html</code></a></h2>
-<p>We learned about the first <code>Html</code> in the signature of the <code>view</code> function. It is
-the Html <em>namespace</em>. A namespace will prevent name clashes between different
-modules. But what about the second <code>Html</code>.</p>
-<p>If you take a look at the <a href="https://package.elm-lang.org/packages/elm/html/latest/"><code>Html</code> documentation</a> you will find it
-exposes a type alias <a href="https://package.elm-lang.org/packages/elm/html/latest/Html#Html"><code>Html</code></a>. The <code>Html</code> type can be used to annotate
-functions like our <code>view</code> function that it is returning Html.</p>
-<h2><a class="header" href="#exposing-names" id="exposing-names">Exposing names</a></h2>
-<p>Sometimes there is no danger of name clashes. E.g. it will be unlikely that we
-will using two <code>Html</code> types. In order to shorten the <code>Html.Html</code> part to just
-the type <code>Html</code> we can expose the <code>Html</code> type into our own namespace.</p>
-<p>We can expose names from modules when we import them. In order to expose the
-<code>Html</code> type from the <code>Html</code> module we would write</p>
-<pre><code class="language-elm">import Html exposing (Html)
-</code></pre>
-<p>This allows us to write the signature of the view function ascii</p>
-<pre><code class="language-elm">view : String -&gt; Html ()
-</code></pre>
-<p>If you find it tedious to have to fully qualify the <code>div</code> and <code>span</code> functions
-from the <code>Html</code> module. the import line would read</p>
-<pre><code class="language-elm">import Html exposing (Html, div, span)
-</code></pre>
+<h2><a class="header" href="#use-serde" id="use-serde">Use serde</a></h2>
+<p>In order to leverage the serialization capabilities of <code>serde_json</code> we need to
+create a <code>serde</code> serializer. There is a very cool trick that <code>serde</code> knows that
+makes this a breeze.</p>
+<p>The first thing we need to do is to announce we our needing <code>serde</code>.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use serde::Serialize;
+#}</code></pre></pre>
+<p>The other thing is that we need to tell <code>serde</code> that we would like it to
+<em>derive</em> serializers for our data types. We can do this by annotating both
+<code>FlashCard</code> and <code>Face</code> with a <code>derive</code> annotation. E.g. <code>Face</code> would be
+annotated like</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[derive(Serialize)]
+pub enum Face {
+    Front,
+    Back,
+}
+#}</code></pre></pre>
 <h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>In this chapter you learned about namespaces, fully qualified names and
-exposing names in your own namespace. In order to verify if you have grasped
-these concept, try to answer the following question.</p>
-<p>Why can't we expose the <code>text</code> function from the <code>Html</code> module?</p>
+<p>With the automatic part of serde done, it is good to see if serialization works
+like we expect. The best way to do this is to test is. Rust integrates testing
+right at the place where the source is created. Add the following code at the
+end of <code>src/domain/mod.rs</code>.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[cfg(test)]
+mod test {
+    use super::*;
+    use serde_json;
+
+    #[test]
+    fn flash_card_can_be_serialized_to_json() {
+        let flash_card = FlashCard::new(&quot;Wettervorhersage&quot;, &quot;Weather forecast&quot;);
+
+        let actual = serde_json::to_string(&amp;flash_card).unwrap();
+
+        let expected = r#&quot;{&quot;front&quot;:&quot;Wettervorhersage&quot;,&quot;back&quot;:&quot;Weather forecast&quot;,&quot;face&quot;:&quot;Front&quot;}&quot;#.to_owned();
+        assert_eq!(actual, expected);
+    }
+}
+#}</code></pre></pre>
+<p>There is some boilerplate to let the test framework know about what we want to
+test. The actual test is</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+        let flash_card = FlashCard::new(&quot;Wettervorhersage&quot;, &quot;Weather forecast&quot;);
+
+        let actual = serde_json::to_string(&amp;flash_card).unwrap();
+
+        let expected = r#&quot;{&quot;front&quot;:&quot;Wettervorhersage&quot;,&quot;back&quot;:&quot;Weather forecast&quot;,&quot;face&quot;:&quot;Front&quot;}&quot;#.to_owned();
+        assert_eq!(actual, expected);
+#}</code></pre></pre>
+<p>It creates a <code>FlashCard</code>, serializes it to JSON with <code>serde_json</code>, sets up an
+expectation, and checks it the expectation is met.</p>
+<p>If you run</p>
+<pre><code class="language-sh">cargo test
+</code></pre>
+<p>it should give the all green.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../frontend/type-annotations.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../backend/model.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../frontend/record-type.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -221,15 +242,11 @@ these concept, try to answer the following question.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../frontend/type-annotations.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../backend/model.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a href="../frontend/record-type.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 

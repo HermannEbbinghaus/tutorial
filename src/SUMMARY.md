@@ -24,3 +24,5 @@
 - [Decoding a FlashCard](./frontend/decode.md)
 - [Testing Elm](./frontend/test.md)
 - [Model on server](./backend/model.md)
+- [Serialize FlashCard](./backend/serialize.md)
+
