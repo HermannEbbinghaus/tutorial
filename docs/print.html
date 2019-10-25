@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1097,6 +1097,89 @@ Duration: 214 ms
 Passed:   1
 Failed:   0
 </code></pre>
+<h1><a class="header" href="#model-on-server" id="model-on-server">Model on server</a></h1>
+<p>If we want the server to send us a flash card, the server first have to have a
+notion of what to send.</p>
+<p>In this chapter we our going to model flash cards on the server.</p>
+<h2><a class="header" href="#librs" id="librs">lib.rs</a></h2>
+<p>The skeletal project generated a <code>main.rs</code>. It would be possible to write all
+the necessary code in this file, but that would quickly become unmaintainable.
+Rust recognizes this fact and allows for code to write in a library instead.</p>
+<p>Create a file <code>lib.rs</code> in the <code>src</code> directory with the following content</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+mod domain;
+#}</code></pre></pre>
+<p>The above definition defines a module called <code>domain</code>. Let's go ahead and create it.</p>
+<h2><a class="header" href="#domainmodrs" id="domainmodrs">domain/mod.rs</a></h2>
+<p>There are various ways to define a module. One way is to create a directory in
+the <code>src</code> directory with the same name as the module, in our case <code>domain</code>, and
+a file <code>mod.rs</code> in that directory.</p>
+<h2><a class="header" href="#struct" id="struct">struct</a></h2>
+<p>We would like to focus on modeling flash cards on the server. We have some
+experience on the client side. Luckily, that experience translates very well to
+the server side.</p>
+<p>Rust also knows about records. Rust calls them structs. Take a look at the
+following code</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub struct FlashCard {
+    front: String,
+    back: String,
+    face: Face,
+}
+#}</code></pre></pre>
+<p>You probably recognizes a lot from Elm's <code>FlashCard</code>. There are two noteworthy
+things two point out.</p>
+<p>First the <code>pub</code> keyword. This allows other modules to use this struct. The other
+is the <code>Face</code> type. Rust doesn't know about it. So we better define it right
+away.</p>
+<h2><a class="header" href="#enum" id="enum">enum</a></h2>
+<p>Our modeling experience on the Elm side helps us on the Rust side as well.
+Again, there is a naming difference, but take a look at <code>Face</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub enum Face {
+    Front,
+    Back,
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#constructor" id="constructor">Constructor</a></h2>
+<p>When we created our model in Elm, we quickly realized that it becomes tedious to
+spell out the structures every time we needed it. To mitigate that we created a
+constructor. Let's do the same in Rust.</p>
+<p>It looks a bit different, but is similar enough that it is recognizable.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl FlashCard {
+    pub fn new&lt;S&gt;(front: S, back: S) -&gt; Self where S: Into&lt;String&gt; {
+        Self { front : front.into(), back : back.into(), face : Face::Front }
+    }
+}
+#}</code></pre></pre>
+<p>The essence is the following line</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+        Self { front : front.into(), back : back.into(), face : Face::Front }
+#}</code></pre></pre>
+<p>It looks a bit strange with the <code>front.into()</code> and <code>back.into()</code> but that is
+because Rust knows different kinds of <a href="https://doc.rust-lang.org/rust-by-example/std/str.html">strings</a>. The input type <code>S : Into&lt;String&gt;</code> allows us to conveniently add any type that knows how to transform
+itself into a <code>String</code>.</p>
+<h2><a class="header" href="#verification-21" id="verification-21">Verification</a></h2>
+<p>We haven't changed our server and only added code. It should still be able to
+build our code.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+cargo build
+#}</code></pre></pre>
+<p>The command above should do just that. Other than given some warnings about our
+new code not being used, it should compile our code.</p>
 
                     </main>
 

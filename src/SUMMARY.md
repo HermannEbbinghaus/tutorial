@@ -23,3 +23,4 @@
 - [Serving the frontend](./backend/serve.md)
 - [Decoding a FlashCard](./frontend/decode.md)
 - [Testing Elm](./frontend/test.md)
+- [Model on server](./backend/model.md)

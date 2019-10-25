@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Updating the model - Flashcard; A tutorial</title>
+        <title>Model on server - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html" class="active"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="../frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="../frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="../backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li></ol>
+                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="../frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="../frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="../backend/model.html" class="active"><strong aria-hidden="true">24.</strong> Model on server</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,83 +145,100 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#updating-the-model" id="updating-the-model">Updating the model</a></h1>
-<p>Let's work on applying the Elm architecture and update the model.</p>
-<h2><a class="header" href="#message" id="message">Message</a></h2>
-<p>We first start to think about the message our model understands. At the moment
-we are only interested in flipping a card. A good message would be <code>Flip</code>. Let's
-start from there</p>
-<pre><code class="language-elm">type Message
-    = Flip
-</code></pre>
-<p>Now we created the ability to express the fact that we want to change our model.</p>
-<h2><a class="header" href="#model" id="model">Model</a></h2>
-<p>We keep talking about our model. We know that it is a flash card, but that could
-change in the future. Aligning our code with the Elm way has some benefits. So
-let's introduce an alias.</p>
-<pre><code class="language-elm">type alias Model =
-    FlashCard
-</code></pre>
-<p>This way we can talk about <code>Model</code> in our signatures and it will align with Elm,
-but we haven't lost the ability to address is as a <code>FlashCard</code>.</p>
-<h2><a class="header" href="#update" id="update">Update</a></h2>
-<p>Let's create an <code>update</code> function. The signature of the update model is
-determined by Elm. It should benefits</p>
-<pre><code class="language-elm">update : Message -&gt; Model -&gt; Model
-</code></pre>
-<p>We give it a <code>Message</code> and a <code>Model</code>. Update will return a <code>Model</code> depending on
-the two. The implementation is straight forward, since there is only one
-instance of the <code>Message</code> type.</p>
-<pre><code class="language-elm">update message model =
-    case message of
-        Flip -&gt;
-            flip model
-</code></pre>
-<p>Match on the message, and for each case, even when there is only one, determine
-what to do. The <code>flip</code> function is what we need in the <code>Flip</code> case.</p>
-<h2><a class="header" href="#wire-it-all-together" id="wire-it-all-together">Wire it all together</a></h2>
-<p>Now we need to tell Elm how these parts work together. There is a 
-<a href="https://package.elm-lang.org/packages/elm/browser/latest/"><code>Browser</code> module</a> that offers different programs. We will be
-interested in <code>sandbox</code>.</p>
-<p>In order to be able to use the <code>Browser</code> module we need to import it.</p>
-<pre><code class="language-elm">import Browser
-</code></pre>
-<p>The sandbox needs a structure with the following fields</p>
-<ul>
-<li><code>init</code>. The initial model.</li>
-<li><code>view</code>. The view function used to display the model.</li>
-<li><code>update</code>. an finally the update function used.</li>
-</ul>
-<p>We all have those in place. So we can</p>
+                        <h1><a class="header" href="#model-on-server" id="model-on-server">Model on server</a></h1>
+<p>If we want the server to send us a flash card, the server first have to have a
+notion of what to send.</p>
+<p>In this chapter we our going to model flash cards on the server.</p>
+<h2><a class="header" href="#librs" id="librs">lib.rs</a></h2>
+<p>The skeletal project generated a <code>main.rs</code>. It would be possible to write all
+the necessary code in this file, but that would quickly become unmaintainable.
+Rust recognizes this fact and allows for code to write in a library instead.</p>
+<p>Create a file <code>lib.rs</code> in the <code>src</code> directory with the following content</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+mod domain;
+#}</code></pre></pre>
+<p>The above definition defines a module called <code>domain</code>. Let's go ahead and create it.</p>
+<h2><a class="header" href="#domainmodrs" id="domainmodrs">domain/mod.rs</a></h2>
+<p>There are various ways to define a module. One way is to create a directory in
+the <code>src</code> directory with the same name as the module, in our case <code>domain</code>, and
+a file <code>mod.rs</code> in that directory.</p>
+<h2><a class="header" href="#struct" id="struct">struct</a></h2>
+<p>We would like to focus on modeling flash cards on the server. We have some
+experience on the client side. Luckily, that experience translates very well to
+the server side.</p>
+<p>Rust also knows about records. Rust calls them structs. Take a look at the
+following code</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub struct FlashCard {
+    front: String,
+    back: String,
+    face: Face,
+}
+#}</code></pre></pre>
+<p>You probably recognizes a lot from Elm's <code>FlashCard</code>. There are two noteworthy
+things two point out.</p>
+<p>First the <code>pub</code> keyword. This allows other modules to use this struct. The other
+is the <code>Face</code> type. Rust doesn't know about it. So we better define it right
+away.</p>
+<h2><a class="header" href="#enum" id="enum">enum</a></h2>
+<p>Our modeling experience on the Elm side helps us on the Rust side as well.
+Again, there is a naming difference, but take a look at <code>Face</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub enum Face {
+    Front,
+    Back,
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#constructor" id="constructor">Constructor</a></h2>
+<p>When we created our model in Elm, we quickly realized that it becomes tedious to
+spell out the structures every time we needed it. To mitigate that we created a
+constructor. Let's do the same in Rust.</p>
+<p>It looks a bit different, but is similar enough that it is recognizable.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl FlashCard {
+    pub fn new&lt;S&gt;(front: S, back: S) -&gt; Self where S: Into&lt;String&gt; {
+        Self { front : front.into(), back : back.into(), face : Face::Front }
+    }
+}
+#}</code></pre></pre>
+<p>The essence is the following line</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+        Self { front : front.into(), back : back.into(), face : Face::Front }
+#}</code></pre></pre>
+<p>It looks a bit strange with the <code>front.into()</code> and <code>back.into()</code> but that is
+because Rust knows different kinds of <a href="https://doc.rust-lang.org/rust-by-example/std/str.html">strings</a>. The input type <code>S : Into&lt;String&gt;</code> allows us to conveniently add any type that knows how to transform
+itself into a <code>String</code>.</p>
 <h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>Change the <code>main</code> variable to</p>
-<pre><code class="language-elm">main =
-    let
-        model =
-            flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;
-    in
-    Browser.sandbox
-        { init = model
-        , view = view
-        , update = update
-        }
-</code></pre>
-<p>And now we can finally flip the flash card.</p>
+<p>We haven't changed our server and only added code. It should still be able to
+build our code.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+cargo build
+#}</code></pre></pre>
+<p>The command above should do just that. Other than given some warnings about our
+new code not being used, it should compile our code.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../frontend/architecture.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../frontend/test.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../frontend/build.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -231,15 +248,11 @@ interested in <code>sandbox</code>.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../frontend/architecture.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../frontend/test.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a href="../frontend/build.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
