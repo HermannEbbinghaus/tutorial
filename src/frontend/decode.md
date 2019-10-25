@@ -57,7 +57,7 @@ Below we will give an example of the JSON we expect to receive. It probably does
 not surprise you that it looks like
 
 ```json
-{ "front": "Wettervorhersage", "back": "Weather forecast", "face": "front" }
+{ "front": "Wettervorhersage", "back": "Weather forecast", "face": "Front" }
 ```
 
 ## Decoder FlashCard
@@ -96,7 +96,7 @@ In `tests/FlashCardTest.elm` write the following code after our other test.
         , test "decode a flash card from JSON" <|
             \_ ->
                 let
-                    input = """{ "front": "Wettervorhersage", "back": "Weather forecast", "face": "back" }"""
+                    input = """{ "front": "Wettervorhersage", "back": "Weather forecast", "face": "Back" }"""
 
                     expected =
                         flash_card "Wettervorhersage" "Weather forecast"

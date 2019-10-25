@@ -186,7 +186,7 @@ when successful the transformation is applied to the result.</p>
 <h2><a class="header" href="#json" id="json">JSON</a></h2>
 <p>Below we will give an example of the JSON we expect to receive. It probably does
 not surprise you that it looks like</p>
-<pre><code class="language-json">{ &quot;front&quot;: &quot;Wettervorhersage&quot;, &quot;back&quot;: &quot;Weather forecast&quot;, &quot;face&quot;: &quot;front&quot; }
+<pre><code class="language-json">{ &quot;front&quot;: &quot;Wettervorhersage&quot;, &quot;back&quot;: &quot;Weather forecast&quot;, &quot;face&quot;: &quot;Front&quot; }
 </code></pre>
 <h2><a class="header" href="#decoder-flashcard" id="decoder-flashcard">Decoder FlashCard</a></h2>
 <p>We will create a decoder that will ignore the face field of the JSON. When we
@@ -216,7 +216,7 @@ write a test to see if our decoder can decode some JSON.</p>
 <pre><code class="language-elm">        , test &quot;decode a flash card from JSON&quot; &lt;|
             \_ -&gt;
                 let
-                    input = &quot;&quot;&quot;{ &quot;front&quot;: &quot;Wettervorhersage&quot;, &quot;back&quot;: &quot;Weather forecast&quot;, &quot;face&quot;: &quot;back&quot; }&quot;&quot;&quot;
+                    input = &quot;&quot;&quot;{ &quot;front&quot;: &quot;Wettervorhersage&quot;, &quot;back&quot;: &quot;Weather forecast&quot;, &quot;face&quot;: &quot;Back&quot; }&quot;&quot;&quot;
 
                     expected =
                         flash_card &quot;Wettervorhersage&quot; &quot;Weather forecast&quot;
