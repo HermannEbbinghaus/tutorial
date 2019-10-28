@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="backend/serialize.html"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="backend/serialize.html"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li><li><a href="backend/send.html"><strong aria-hidden="true">26.</strong> Sending FlashCard</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1257,6 +1257,128 @@ expectation, and checks it the expectation is met.</p>
 <pre><code class="language-sh">cargo test
 </code></pre>
 <p>it should give the all green.</p>
+<h1><a class="header" href="#sending-flashcard" id="sending-flashcard">Sending FlashCard</a></h1>
+<p>We are capable to serialize a flash card to JSON. The next step is to send it to
+the frontend. We will do this by making an end point where the frontend can
+request a flash card.</p>
+<p>This probably will be a somewhat longer chapter because there are a lot of
+moving pieces. So make sure to fetch yourself a nice drink and strap in for the
+ride.</p>
+<h2><a class="header" href="#dependencies" id="dependencies">Dependencies</a></h2>
+<p>We will be using some dependencies that need to be declared in the <code>Cargo.toml</code>.
+Specifically the following dependencies</p>
+<pre><code class="language-toml">hyper = &quot;0.12.35&quot;
+mime = &quot;0.3.14&quot;
+</code></pre>
+<h2><a class="header" href="#create-a-new-route" id="create-a-new-route">Create a new route</a></h2>
+<p>The next step is to dream up a new route. Where should the frontend get a
+flash card from. We are offering an API and it is reasonable to adhere to the
+<a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> model. One suggestion is to choose <code>/api/flashcard</code>.</p>
+<p>In <code>main.rs</code> we have configured a router. We can extend it with a route for a
+flash card</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+route.get(&quot;/api/flashcard&quot;).to(get_flash_card);
+#}</code></pre></pre>
+<p>the <code>get_flash_card</code> handler is something that does not yet exist. But it is
+something we like. In order to use it we should do</p>
+<ol>
+<li>Announce the use of an external crate. In <code>main.rs</code> at the top add</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+extern crate flashcard_server;
+#}</code></pre></pre>
+<ol start="2">
+<li>Use the <code>get_flash_card</code> function. Also in <code>main.rs</code> add an other <code>use</code>
+expression</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use flashcard_server::handler::flashcard::*;
+#}</code></pre></pre>
+<h2><a class="header" href="#create-a-new-module" id="create-a-new-module">Create a new module</a></h2>
+<p>From the usage we learn that there should be a <code>handler</code>. So we need to announce
+that in out <code>lib.rs</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub mod handler;
+#}</code></pre></pre>
+<p>We will create this module by using a sub-directory <code>handler</code> that contains a
+<code>mod.rs</code> file. We probably are going to create a lot of handlers for this
+applications so the contains of the <code>handler/mod.rs</code> could look like this.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub mod flashcard;
+#}</code></pre></pre>
+<p>This just announces an other module. This time do, we are not creating a
+sub-directory. Instead we are creating a file named <code>flashcard.rs</code> in the
+<code>handler</code> directory. This is the other way of creating a module.</p>
+<p><code>flashcard.rs</code> should have our definition of <code>get_flash_card</code>.</p>
+<h2><a class="header" href="#get_flash_card" id="get_flash_card"><code>get_flash_card</code></a></h2>
+<p>A handler has a particular signature for the gotham web framework to work with
+it. In goes a <code>State</code>, a provided by gotham. At goes a tuple of a state, and
+whatever you want to return. All in all this amounts to the following code.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use gotham::state::State;
+use crate::domain::FlashCard;
+
+
+pub fn get_flash_card(state: State) -&gt; (State, FlashCard) {
+    let flash_card = FlashCard::new(&quot;Kodieren&quot;, &quot;Encode&quot;);
+
+    (state, flash_card)
+}
+#}</code></pre></pre>
+<p>Here we create a new flash card and remove it with the state unaltered.</p>
+<h2><a class="header" href="#response" id="response">Response</a></h2>
+<p>The web is build about requests and responses. Each response can be of a certain
+<a href="https://en.wikipedia.org/wiki/MIME"><em>MIME</em></a> type, but it can't know everything that could be send back. So we
+will need to tell gotham how to create a real response from a flash card.</p>
+<p>There is a <a href="https://doc.rust-lang.org/1.8.0/book/traits.html"><em>trait</em></a> that you can implement that does precisely that. It
+is called <code>IntoResponse</code> and it will allow us to specifiy how to turn a flash
+card into a response.</p>
+<p>In order to use it we need to declare it, and related type.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use gotham::handler::IntoResponse;
+use gotham::helpers::http::response::create_response;
+use gotham::state::State;
+use hyper::{Body, Response, StatusCode};
+#}</code></pre></pre>
+<p>Next we should implement the <code>IntoResponse</code> trait.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl IntoResponse for FlashCard {
+    fn into_response(self, state: &amp;State) -&gt; Response&lt;Body&gt; {
+        create_response(
+            state,
+            StatusCode::OK,
+            mime::APPLICATION_JSON,
+            serde_json::to_string(&amp;self).expect(&quot;serialized flash card&quot;),
+        )
+    }
+}
+#}</code></pre></pre>
+<p>Here we use the <code>create_response</code> function to create a valid response, which
+contains JSON with a body of a string representation of the flash card.</p>
+<h2><a class="header" href="#verification-23" id="verification-23">Verification</a></h2>
+<p>When you restart the application and open a terminal you should be able to
+execute the following curl command</p>
+<pre><code class="language-sh">curl -X GET http://localhost:8886/api/flashcard
+</code></pre>
+<p>and the server should respond with</p>
+<pre><code class="language-plain">{&quot;front&quot;:&quot;Kodieren&quot;,&quot;back&quot;:&quot;Encode&quot;,&quot;face&quot;:&quot;Front&quot;}⏎
+</code></pre>
 
                     </main>
 
