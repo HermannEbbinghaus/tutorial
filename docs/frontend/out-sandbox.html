@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Type annotations - Flashcard; A tutorial</title>
+        <title>Moving out of the sandbox - Flashcard; A tutorial</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html" class="active"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="../frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="../frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="../backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="../backend/serialize.html"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li><li><a href="../backend/send.html"><strong aria-hidden="true">26.</strong> Sending FlashCard</a></li><li><a href="../frontend/out-sandbox.html"><strong aria-hidden="true">27.</strong> Moving out of the sandbox</a></li></ol>
+                <ol class="chapter"><li><a href="../about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="../install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="../frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="../frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="../frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="../frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="../frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="../frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="../frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="../frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="../frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="../frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="../frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="../frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="../frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="../frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="../install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="../client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="../backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="../backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="../backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="../frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="../frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="../backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="../backend/serialize.html"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li><li><a href="../backend/send.html"><strong aria-hidden="true">26.</strong> Sending FlashCard</a></li><li><a href="../frontend/out-sandbox.html" class="active"><strong aria-hidden="true">27.</strong> Moving out of the sandbox</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,68 +145,104 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#type-annotations" id="type-annotations">Type annotations</a></h1>
-<p>We have just created a custom function. It is lacking one of the Elm strongest
-features. I.e. <a href="https://en.wikipedia.org/wiki/Data_type"><em>type information</em></a>.</p>
-<p>Types help a compiler to determine if programs are correct. They can be used to
-verify that the expectations you have about functions and programs are met, even
-before the program is run.</p>
-<p>Up until now, Elm has <em>inferred</em> the types of our functions. But relying on the
-type inference could hide some problems. So let's annotate our <code>view</code> function
-with it's type.</p>
-<h2><a class="header" href="#common-types" id="common-types">Common types</a></h2>
-<p>Elm has some built in types that you can use right out of the gate. One that we
-already have used is <a href="https://package.elm-lang.org/packages/elm/core/latest/String"><code>String</code></a>. It is a chunk of text. Elm also
-provides a myriad of functions for <code>String</code> but now we are only interested in
-it's type.</p>
-<p>Remember that Elm is a <a href="https://en.wikipedia.org/wiki/Functional_programming">functional language</a>? Because functions are
-so important you can provide type information for them as well. This is done
-with an arrow <code>-&gt;</code>.</p>
-<p>On the left side of the arrow you place the type of the argument of the
-function. To the right of the arrow you place the type of the return value. But
-what is that? Let's guess it to by <code>String</code> and see what Elm makes of it.</p>
-<p>Providing type information for the <code>view</code> function is done by</p>
-<pre><code class="language-elm">view : String -&gt; String
-</code></pre>
-<p>This is placed right above the definition of the <code>view</code> function.</p>
-<h2><a class="header" href="#verification" id="verification">Verification</a></h2>
-<p>If you reload the application you will be greated by a friendly message from the
-Elm compiler</p>
+                        <h1><a class="header" href="#moving-out-of-the-sandbox" id="moving-out-of-the-sandbox">Moving out of the sandbox</a></h1>
+<p>Up until now we have been relying on Elm's sandbox. The sandbox allows for a
+user to interact with the component in a limited way. For example, it is <strong>not</strong>
+possible to make an HTTP call.</p>
+<p>We would like to do just that, so it is time to move out of the sandbox.</p>
+<h2><a class="header" href="#browserelement" id="browserelement"><code>Browser.element</code></a></h2>
+<p>The next step up on the Elm ladder is <a href="https://package.elm-lang.org/packages/elm/browser/latest/Browser#element"><code>Browser.element</code></a>. From the
+element documentation we learn</p>
 <blockquote>
-<p>-- TYPE MISMATCH --------------------------------------------- src/FlashCard.elm</p>
-<p>Something is off with the body of the <code>view</code> definition:</p>
-<p>11|&gt;    Html.div []
-12|&gt;        [ Html.span [] [ Html.text text ]
-13|&gt;        ]</p>
-<p>This <code>div</code> call produces:</p>
-<pre><code>Html.Html msg
-</code></pre>
-<p>But the type annotation on <code>view</code> says it should be:</p>
-<pre><code>String
-</code></pre>
+<p>Unlike a sandbox, an element can talk to the outside world in a couple ways</p>
 </blockquote>
-<p>We guessed the return type for the <code>view</code> function to be <code>String</code>. But that is not
-correct. Elm noticed that the type difference from what actually is returned.
-Let's change the type signature of the <code>view</code> function to</p>
-<pre><code class="language-elm">view : String -&gt; Html.Html ()
+<p>We will give a brief description of those ways, paying attention which are
+relevant for us.</p>
+<h3><a class="header" href="#commands" id="commands">Commands</a></h3>
+<p>Commands are a way to request the Elm runtime to do a task. Making an HTTP call
+is an example.</p>
+<p>Commands are a way to describe a certain action. This keeps your program <em>pure</em>,
+i.e. function always return the same value when called with similar arguments.
+The Elm runtime will respond by performing the command you specified.</p>
+<p>The Elm runtime notifies you of the result by calling the update function.</p>
+<h3><a class="header" href="#subscriptions" id="subscriptions">Subscriptions</a></h3>
+<p>Sometimes you are interested in something your component is not responsible for.
+E.g. ticking of time, or mouse clicks. If you are interested in these things you
+can <em>subscribe</em> to these events.</p>
+<p>Again, Elm runtime notifies you of an event from a subscription by calling the
+update function.</p>
+<h3><a class="header" href="#flags" id="flags">Flags</a></h3>
+<p>Let's we are creating our app and our customers want there name embossed on the
+flash card. The functionality would not change, besides that our model would
+keep track of the customer name.</p>
+<p>One way to configure our application is by sending flags. This allows an
+application to change behavior right from the start. E.g. one could pass in via
+a flag the address one should retrieve flash cards from.</p>
+<h3><a class="header" href="#ports" id="ports">Ports</a></h3>
+<p>If you want even more communications with the outside world, ports allow you to
+send and receive messages. They are the defacto way of communicating with
+anything outside the control of the Elm runtime.</p>
+<p>For example if you want to make use of a JavaScript library that does not have
+an native Elm counterpart one should use ports to establish a bridge</p>
+<h2><a class="header" href="#updating-update" id="updating-update">Updating <code>update</code></a></h2>
+<p>The <code>update</code> function needs to be updated because it needs to be able to fire of
+commands. This dual responsibility is reflected in the signature. For
+completeness we show the current signature.</p>
+<pre><code class="language-elm">update : Message -&gt; Model -&gt; Model
 </code></pre>
-<p>for now. We will go into the convoluted <code>Html.Html ()</code> later.</p>
-<p>Once you reload the application again. You should be greeted by &quot;Wettervorhersage&quot;.</p>
+<p>Besides updating the model, We could potentially also create a command, to be
+executed by the Elm runtime. The new signature is</p>
+<pre><code class="language-elm">update : Message -&gt; Model -&gt; ( Model, Cmd Message )
+</code></pre>
+<p>This will break the implementation. For now it is enough to create a tuple with
+as second component <code>Cmd.none</code>.</p>
+<pre><code class="language-elm">Flip -&gt;
+    ( Maybe.map flip model, Cmd.none )
+</code></pre>
+<h2><a class="header" href="#default-subscriptions" id="default-subscriptions">Default subscriptions</a></h2>
+<p>At the moment we don't want to subscribe to anything. We can tell Elm that by
+configuring <code>Sub.none</code>, similar to <code>Cmd.none</code>.</p>
+<p>In order to prepare for future extension we will be creating a subscriptions
+definition that we will reference when we are creating a <code>Browser.element</code>.</p>
+<pre><code class="language-elm">subscriptions : Model -&gt; Sub Message
+subscriptions _ =
+    Sub.none
+</code></pre>
+<h2><a class="header" href="#updating-init" id="updating-init">Updating init</a></h2>
+<p>When we will introduce a <code>Browser.element</code> our current <code>init</code> field from the
+<code>Browser.sandbox</code>does not suffice anymore. Again. We could kick off our entire
+process by doing a request. Furthermore, our initial model could depend on some
+flags.</p>
+<p>For now we want to ignore the flags, and don't want to send a command. It
+suffices to change our init to.</p>
+<pre><code class="language-elm">init = \_ -&gt; ( model, Cmd.none )
+</code></pre>
+<h2><a class="header" href="#replace-browsersandbox-with-browserelement" id="replace-browsersandbox-with-browserelement">Replace <code>Browser.sandbox</code> with <code>Browser.element</code></a></h2>
+<p>Now we can replace <code>Browser.sandbox</code> with <code>Browser.element</code>. It will still
+complain, because it is missing a <code>subscriptions</code> field. But we prepared for
+that.</p>
+<p>All in all our program definition looks like</p>
+<pre><code class="language-elm">Browser.element
+    { init = \_ -&gt; ( Nothing, cmd )
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
+</code></pre>
+<h2><a class="header" href="#verification" id="verification">Verification</a></h2>
+<p>Building the app and opening the application would still allow you to learn the
+translation of <code>Wettervorhersage</code>.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../frontend/custom-function.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../backend/send.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../frontend/namespaces.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -216,15 +252,11 @@ Let's change the type signature of the <code>view</code> function to</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../frontend/custom-function.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="../backend/send.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a href="../frontend/namespaces.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 

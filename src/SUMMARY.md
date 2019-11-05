@@ -26,4 +26,5 @@
 - [Model on server](./backend/model.md)
 - [Serialize FlashCard](./backend/serialize.md)
 - [Sending FlashCard](./backend/send.md)
+- [Moving out of the sandbox](./frontend/out-sandbox.md)
 
