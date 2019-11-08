@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="backend/serialize.html"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li><li><a href="backend/send.html"><strong aria-hidden="true">26.</strong> Sending FlashCard</a></li><li><a href="frontend/out-sandbox.html"><strong aria-hidden="true">27.</strong> Moving out of the sandbox</a></li></ol>
+                <ol class="chapter"><li><a href="about.html"><strong aria-hidden="true">1.</strong> What is this tutorial about</a></li><li><a href="install-elm.html"><strong aria-hidden="true">2.</strong> Installing Elm</a></li><li><a href="frontend/skeletal-elm.html"><strong aria-hidden="true">3.</strong> Skeletal Elm project</a></li><li><a href="frontend/first-flash.html"><strong aria-hidden="true">4.</strong> A first flash card</a></li><li><a href="frontend/custom-function.html"><strong aria-hidden="true">5.</strong> A custom function</a></li><li><a href="frontend/type-annotations.html"><strong aria-hidden="true">6.</strong> Type annotations</a></li><li><a href="frontend/namespaces.html"><strong aria-hidden="true">7.</strong> Namespaces</a></li><li><a href="frontend/record-type.html"><strong aria-hidden="true">8.</strong> A record type</a></li><li><a href="frontend/type-alias.html"><strong aria-hidden="true">9.</strong> Type alias</a></li><li><a href="frontend/custom-type.html"><strong aria-hidden="true">10.</strong> A custom type</a></li><li><a href="frontend/constructor.html"><strong aria-hidden="true">11.</strong> A convenient function</a></li><li><a href="frontend/let-block.html"><strong aria-hidden="true">12.</strong> Showing the back</a></li><li><a href="frontend/flip.html"><strong aria-hidden="true">13.</strong> Flip the card</a></li><li><a href="frontend/architecture.html"><strong aria-hidden="true">14.</strong> Elm Architecture</a></li><li><a href="frontend/update.html"><strong aria-hidden="true">15.</strong> Updating the model</a></li><li><a href="frontend/build.html"><strong aria-hidden="true">16.</strong> Building the frontend</a></li><li><a href="install-rust.html"><strong aria-hidden="true">17.</strong> Installing Rust</a></li><li><a href="client-directory.html"><strong aria-hidden="true">18.</strong> Creating a client directory</a></li><li><a href="backend/skeletal-rust.html"><strong aria-hidden="true">19.</strong> Skeletal Rust project</a></li><li><a href="backend/server.html"><strong aria-hidden="true">20.</strong> Simple Server</a></li><li><a href="backend/serve.html"><strong aria-hidden="true">21.</strong> Serving the frontend</a></li><li><a href="frontend/decode.html"><strong aria-hidden="true">22.</strong> Decoding a FlashCard</a></li><li><a href="frontend/test.html"><strong aria-hidden="true">23.</strong> Testing Elm</a></li><li><a href="backend/model.html"><strong aria-hidden="true">24.</strong> Model on server</a></li><li><a href="backend/serialize.html"><strong aria-hidden="true">25.</strong> Serialize FlashCard</a></li><li><a href="backend/send.html"><strong aria-hidden="true">26.</strong> Sending FlashCard</a></li><li><a href="frontend/out-sandbox.html"><strong aria-hidden="true">27.</strong> Moving out of the sandbox</a></li><li><a href="frontend/prepare.html"><strong aria-hidden="true">28.</strong> Prepare to receiving a FlashCard</a></li><li><a href="frontend/receive.html"><strong aria-hidden="true">29.</strong> Receiving FlashCard</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1466,6 +1466,167 @@ that.</p>
 <h2><a class="header" href="#verification-24" id="verification-24">Verification</a></h2>
 <p>Building the app and opening the application would still allow you to learn the
 translation of <code>Wettervorhersage</code>.</p>
+<h1><a class="header" href="#prepare-to-receiving-a-flashcard" id="prepare-to-receiving-a-flashcard">Prepare to receiving a FlashCard</a></h1>
+<p>We have transformed our sandbox into an actual element. This allows us to make
+HTTP calls. We could put that to good use because our server is ready to send us
+a flash card, we only need to ask.</p>
+<p>In this chapter we will make a request for a flash card to our server, receive
+it and display it in our client.</p>
+<h2><a class="header" href="#changing-the-model" id="changing-the-model">Changing the model</a></h2>
+<p>Currently we assume we always have a flash card. Put since we are planning to
+receive one over the internet, things could go wrong. In order to be honest
+about this fact, we are going to change our model.</p>
+<p>Currently we our model is an alias for <code>FlashCard</code></p>
+<pre><code class="language-elm">type alias Model =
+    Maybe FlashCard
+</code></pre>
+<p>Let's modify it to reflect that we <em>maybe</em> don't have a flash card all the time.</p>
+<pre><code class="language-elm">type alias Model =
+    Maybe FlashCard
+</code></pre>
+<p>This breaks a few things that we need to fix.</p>
+<h2><a class="header" href="#view" id="view"><code>view</code></a></h2>
+<p>The <code>view</code> accepts a model so we need to adopt it to our new definition.</p>
+<p>Earlier we could just take the flash card and display a meaningful
+representation. Now we first must make sure that we actual have a flash card and
+show a helpful message when we don't.</p>
+<p>We can achieve this with a pattern match. <code>Maybe</code> has two constructors, in our
+case <code>Just card</code>, where <code>card</code> is a <code>FlashCard</code> or <code>Nothing</code>. So our <code>view</code>
+functions needs to start with a pattern match like so</p>
+<pre><code class="language-elm">view : Model -&gt; Html.Html Message
+view model =
+    case model of
+        Just card -&gt;
+            -- details below
+
+        Nothing -&gt;
+            -- details below
+</code></pre>
+<p>The <code>Just card</code> branch should do what we always did, changed to reflect the use
+of the <code>card</code> variable.</p>
+<pre><code class="language-elm">let
+    text =
+        case card.face of
+            Front -&gt;
+                card.front
+
+            Back -&gt;
+                card.back
+in
+div []
+    [ span [] [ Html.text text ]
+    , button [ Event.onClick Flip ] [ Html.text &quot;flip&quot; ]
+    ]
+</code></pre>
+<p>When we don't have a flash card, i.e. in the <code>Nothing</code> branch we need to report
+this fact to the user.</p>
+<pre><code class="language-elm">div [] [ span [] [ Html.text &quot;No flash card to show&quot; ] ]
+</code></pre>
+<p>This wraps up our <code>view</code> function.</p>
+<h2><a class="header" href="#update-1" id="update-1"><code>update</code></a></h2>
+<p>Our <code>update</code> function also accepts a model, so it needs to change as well.
+Before we could just call the <code>flip</code> function on our model when we received a
+<code>Flip</code> message.</p>
+<p>Now, because it is wrapped in a <code>Maybe</code> type, this will not work. The types
+don't work out.</p>
+<p>Luckily the <a href="https://package.elm-lang.org/packages/elm/core/latest/Maybe"><code>Maybe</code> type</a> has a convenient function called <a href="https://package.elm-lang.org/packages/elm/core/latest/Maybe#map"><code>map</code></a>.
+The signature of <code>map</code> is</p>
+<pre><code class="language-elm">(a -&gt; b) -&gt; Maybe a -&gt; Maybe b
+</code></pre>
+<p>which allows use to</p>
+<blockquote>
+<p>Transform a Maybe value with a given function</p>
+</blockquote>
+<p>I.e. allow us to apply a function to <code>Maybe FlashCard</code> with out unpacking it
+first. Our update function can therefore be</p>
+<pre><code class="language-elm">update : Message -&gt; Model -&gt; ( Model, Cmd Message )
+update message model =
+    case message of
+        Flip -&gt;
+            ( Maybe.map flip model, Cmd.none )
+</code></pre>
+<h2><a class="header" href="#initial-model" id="initial-model">Initial model</a></h2>
+<p>In our <code>main</code> function we our creating a model by hand. At the moment it is just
+a flash card, but it needs to account for the fact that maybe it isn't present.
+The most dramatic change would be to pick <code>Nothing</code> as our starting value.</p>
+<pre><code class="language-elm">    Browser.element
+        { init = \_ -&gt; ( Nothing, Cmd.none )
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
+</code></pre>
+<h2><a class="header" href="#verification-25" id="verification-25">Verification</a></h2>
+<p>When you build the client and serve it from the server, this time you should see
+a message that there isn't a flash card.</p>
+<p>Let's remedy that in the next chapter.</p>
+<h1><a class="header" href="#receiving-flashcard" id="receiving-flashcard">Receiving FlashCard</a></h1>
+<p>All the pieces are aligned for receiving a flash card from the server. Let's
+dive right into it.</p>
+<h2><a class="header" href="#new-message" id="new-message">New message</a></h2>
+<p>The Elm runtime needs a way to tell us that there is a new flash card from the
+server. The Elm runtime wants to do that by sending the <code>update</code> function a
+message. Let's create a message for that specific event.</p>
+<p>We want to be notified from a result from the server. Since we will be receiving
+it over the network, a lot of things can go wrong. To acknowledge this we will
+be making use of an other Elm type: <a href="https://package.elm-lang.org/packages/elm/core/latest/Result"><code>Result</code></a></p>
+<blockquote>
+<p>A Result is the result of a computation that may fail. This is a great way to
+manage errors in Elm.</p>
+</blockquote>
+<p>Since the errors that occur will be coming from the network, we will be needing
+types from the standard library.</p>
+<pre><code class="language-elm">import Http
+</code></pre>
+<p>Let's use it in our <code>Message</code>. We will be creating a message that the Elm
+runtime can use to inform us.</p>
+<pre><code class="language-elm">type Message
+    = Flip
+    | Received (Result Http.Error FlashCard)
+</code></pre>
+<p>The new addition is <code>Received</code>. It has a parameter of type 
+<code>Result Http.Error Flashcard</code>. This tells us that we will receive the result of
+a &quot;computation&quot; that when successful will return a <code>FlashCard</code>.</p>
+<h2><a class="header" href="#creating-a-command" id="creating-a-command">Creating a command</a></h2>
+<p>At the moment we initialize our main definition with <code>Nothing</code> as a model. We
+would like to receive a flash card from the server. So we will <em>command</em> the Elm
+runtime to fetch it for use.</p>
+<p>We do need to tell the Elm runtime how to do that. We can do that by returning
+an actual command instead of <code>Cmd.none</code>. Let's focus on the let-block in the
+<code>main</code> function.</p>
+<pre><code class="language-elm">let
+    cmd =
+        Http.get
+            { url = &quot;/api/flashcard&quot;
+            , expect = Http.expectJson Received decode
+            }
+in
+</code></pre>
+<p>Here we create a command <code>cmd</code> by calling <code>Http.get</code>. It needs a structure with
+an <code>url</code> field. You might recognize the URL from when we routed it in the
+server.</p>
+<p>The structure also needs an expect field which needs to be a <code>Http.Expect a</code>.
+One way of creating such an <code>Expect</code> is with the <code>Http.expectJson</code> function.</p>
+<p>In it's turn the <code>expectJson</code> function needs two arguments. The first argument
+is a way to turn a <code>Result Http.Error a</code> into a <code>Message</code>. Remember that we
+created a <code>Recieve</code> message constructor. This constructor is precisely the
+function we need.
+The second argument is telling the Elm runtime how to transform the JSON from
+the server into a type we are interested in. Remember that we created a 
+<code>Decoder FlashCard</code> for that. It was bound to <code>decode</code>.</p>
+<p>This wraps up the creation of the command. Let's focus on sending it.</p>
+<h2><a class="header" href="#sending-a-command" id="sending-a-command">Sending a command</a></h2>
+<p>Sending the command is a bit anti-climactic. It is nothing more than replacing
+the <code>Cmd.none</code> in the <code>init</code> field of the structure fed to the <code>Browser.element</code>
+function with our <code>cmd</code>.</p>
+<pre><code class="language-elm">init = \_ -&gt; ( Nothing, cmd )
+</code></pre>
+<h2><a class="header" href="#verification-26" id="verification-26">Verification</a></h2>
+<p>This is the moment of truth. Building the client and restarting the server
+should, when you open the application, show a flash card. It isn't the by now
+familiar <code>Wettervorhersage</code> one.</p>
+<p>Instead it should show you the flash card defined on the server. It is placed
+there to remind you of a job well done.</p>
 
                     </main>
 

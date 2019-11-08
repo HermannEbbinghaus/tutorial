@@ -27,4 +27,5 @@
 - [Serialize FlashCard](./backend/serialize.md)
 - [Sending FlashCard](./backend/send.md)
 - [Moving out of the sandbox](./frontend/out-sandbox.md)
-
+- [Prepare to receiving a FlashCard](./frontend/prepare.md)
+- [Receiving FlashCard](./frontend/receive.md)
